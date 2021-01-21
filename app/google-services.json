@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "372285389869",
+    "project_id": "shanksvilla",
+    "storage_bucket": "shanksvilla.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372285389869:android:ef62489165649269e70ca4",
+        "android_client_info": {
+          "package_name": "com.example.shanksvilla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372285389869-mi6cfdq87al49jr3r6dr9fac5fgboem9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA033bfEyl8hr0NnipkSPaElH7tZduCE9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372285389869-mi6cfdq87al49jr3r6dr9fac5fgboem9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
