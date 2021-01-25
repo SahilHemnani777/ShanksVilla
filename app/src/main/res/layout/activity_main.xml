@@ -61,7 +61,7 @@
         app:srcCompat="@drawable/twitter" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/phoneSignInButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
@@ -76,7 +76,7 @@
         android:layout_marginBottom="16dp"
         android:text="or SignIn with"
         app:layout_constraintBottom_toTopOf="@+id/phoneSignInbtn"
-        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="@+id/phoneSignInButton"
         app:layout_constraintStart_toStartOf="@+id/facebookSignInbtn" />
 
     <TextView
