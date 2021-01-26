@@ -1,4 +1,4 @@
-package com.example.shanksvilla;
+package com.example.shanksvilla.signin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.shanksvilla.HomeActivity;
+import com.example.shanksvilla.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,8 +25,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+
+
+//Master login Screen for the Login Of all the Activities
+
+public class GoogleSignInActivity extends AppCompatActivity {
+    private static final String TAG = "GoogleSignInActivity";
 
     private Button GoogleSignInButton;
     private ImageView FacebookSignInButton;
@@ -39,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         // Configure sign-in to request the user's ID, email address, and basic
 // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -48,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+
+
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.googleSignInbtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 signIn();
             }
         });
-
-
-
 
     }
     private void signIn() {
@@ -79,18 +86,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
-                // ...
             }
-        }
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
-        if (currentUser!=null){
-            startActivity(new Intent(MainActivity.this, HomeActivity.class));
         }
     }
     private void firebaseAuthWithGoogle(String idToken) {
@@ -103,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                            startActivity(new Intent(GoogleSignInActivity.this, HomeActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -112,6 +108,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        updateUI(currentUser);
+        if (currentUser!=null){
+            startActivity(new Intent(GoogleSignInActivity.this, HomeActivity.class));
+        }
+    }
 
 }
