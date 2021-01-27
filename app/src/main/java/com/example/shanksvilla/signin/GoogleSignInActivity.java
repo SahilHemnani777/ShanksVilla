@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,15 +38,20 @@ public class GoogleSignInActivity extends AppCompatActivity {
     private static final String TAG = "GoogleSignInActivity";
 
     private Button GoogleSignInButton;
-    private ImageView FacebookSignInButton;
-    private ImageView TwitterSignInButton;
-    private ImageView PhoneSignInButton;
+
+
+    private Button btnLogin;
+    private EditText mEmail;
+    private EditText mPassword;
+
 
     private static final int RC_SIGN_IN = 100;
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
+
+    private TextView createNewAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +75,28 @@ public class GoogleSignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 signIn();
+            }
+        });
+
+        createNewAccount = findViewById(R.id.createNewAccount);
+        createNewAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GoogleSignInActivity.this,CreateAccountActivity.class));
+            }
+        });
+
+        mEmail= findViewById(R.id.emailLogin);
+        mPassword = findViewById(R.id.passwordLogin);
+        btnLogin= findViewById(R.id.btnLogin);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email= mEmail.getText().toString();
+                String pass= mPassword.getText().toString();
+                mAuth.signInWithEmailAndPassword(email,pass);
+                startActivity(new Intent(GoogleSignInActivity.this,HomeActivity.class));
             }
         });
 
@@ -106,6 +135,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             addUserToDataBase();
                             startActivity(new Intent(GoogleSignInActivity.this, HomeActivity.class));
+                            Toast.makeText(GoogleSignInActivity.this, "Login as: "+mAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
