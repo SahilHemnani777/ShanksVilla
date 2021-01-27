@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
+    private static final String TAG = "HomeActivity";
 
     private Button buttonLogout;
     @Override
@@ -34,6 +35,9 @@ public class HomeActivity extends AppCompatActivity {
                 signOut();
             }
         });
+
+
+
     }
     private void signOut() {
         mGoogleSignInClient.signOut()

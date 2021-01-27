@@ -1,17 +1,21 @@
 package com.example.shanksvilla.signin;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shanksvilla.HomeActivity;
 import com.example.shanksvilla.R;
+import com.example.shanksvilla.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,7 +28,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 //Master login Screen for the Login Of all the Activities
@@ -33,13 +38,20 @@ public class GoogleSignInActivity extends AppCompatActivity {
     private static final String TAG = "GoogleSignInActivity";
 
     private Button GoogleSignInButton;
-    private ImageView FacebookSignInButton;
-    private ImageView TwitterSignInButton;
-    private ImageView PhoneSignInButton;
+
+
+    private Button btnLogin;
+    private EditText mEmail;
+    private EditText mPassword;
+
 
     private static final int RC_SIGN_IN = 100;
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
+
+    private TextView createNewAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +75,28 @@ public class GoogleSignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 signIn();
+            }
+        });
+
+        createNewAccount = findViewById(R.id.createNewAccount);
+        createNewAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GoogleSignInActivity.this,CreateAccountActivity.class));
+            }
+        });
+
+        mEmail= findViewById(R.id.emailLogin);
+        mPassword = findViewById(R.id.passwordLogin);
+        btnLogin= findViewById(R.id.btnLogin);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email= mEmail.getText().toString();
+                String pass= mPassword.getText().toString();
+                mAuth.signInWithEmailAndPassword(email,pass);
+                startActivity(new Intent(GoogleSignInActivity.this,HomeActivity.class));
             }
         });
 
@@ -99,7 +133,9 @@ public class GoogleSignInActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            addUserToDataBase();
                             startActivity(new Intent(GoogleSignInActivity.this, HomeActivity.class));
+                            Toast.makeText(GoogleSignInActivity.this, "Login as: "+mAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -119,4 +155,23 @@ public class GoogleSignInActivity extends AppCompatActivity {
         }
     }
 
+    public void addUserToDataBase(){
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            //Taking values from the google Account
+            String personName = acct.getDisplayName();
+            String personGivenName = acct.getGivenName();
+            String personFamilyName = acct.getFamilyName();
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            Uri personPhoto = acct.getPhotoUrl();
+            //Taking value of Uid from the Firebase Auth
+            String id= FirebaseAuth.getInstance().getCurrentUser().getUid();
+            //using the model class to assign the values
+            User user = new User(personName,personPhoto.toString(),id,personEmail);
+            //setting up the database
+            myRef.child("Users").child(user.getId()).setValue(user);
+//            Log.d(TAG, "addUserToDataBase: done");
+        }
+    }
 }
