@@ -49,6 +49,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createNewAccount();
+                finish();
             }
         });
     }

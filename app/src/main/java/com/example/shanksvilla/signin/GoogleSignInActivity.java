@@ -58,7 +58,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Log.d(TAG, "onCreate: started");
         // Configure sign-in to request the user's ID, email address, and basic
 // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -99,6 +99,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
                 startActivity(new Intent(GoogleSignInActivity.this,HomeActivity.class));
             }
         });
+        Log.d(TAG, "onCreate: finished");
 
     }
     private void signIn() {
@@ -149,10 +150,14 @@ public class GoogleSignInActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        Log.d(TAG, "onStart: started");
 //        updateUI(currentUser);
         if (currentUser!=null){
+            Log.d(TAG, "onStart: currnet user is not null: "+ currentUser.getEmail());
             startActivity(new Intent(GoogleSignInActivity.this, HomeActivity.class));
+
         }
+        Log.d(TAG, "onStart: finished");
     }
 
     public void addUserToDataBase(){
