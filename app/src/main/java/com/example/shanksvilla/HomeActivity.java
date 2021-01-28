@@ -1,6 +1,7 @@
 package com.example.shanksvilla;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -28,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        Log.d(TAG, "onCreate: started");
         findViewById(R.id.logoutbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-
+        Log.d(TAG, "onCreate: finished");
     }
     private void signOut() {
         mGoogleSignInClient.signOut()
