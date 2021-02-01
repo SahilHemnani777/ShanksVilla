@@ -60,7 +60,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate: started");
         // Configure sign-in to request the user's ID, email address, and basic
-// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -95,11 +95,24 @@ public class GoogleSignInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email= mEmail.getText().toString();
                 String pass= mPassword.getText().toString();
-                mAuth.signInWithEmailAndPassword(email,pass);
-                startActivity(new Intent(GoogleSignInActivity.this,HomeActivity.class));
+                mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if (user.isEmailVerified()){
+                                //If the user has verified his email address then he/she can login otherwise he can not
+                                startActivity(new Intent(GoogleSignInActivity.this,HomeActivity.class));
+                                finish();
+                            }else{
+                                Toast.makeText(GoogleSignInActivity.this, "Please verify your email address", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
             }
         });
-        Log.d(TAG, "onCreate: finished");
+//        Log.d(TAG, "onCreate: finished");
 
     }
     private void signIn() {
@@ -150,10 +163,10 @@ public class GoogleSignInActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        Log.d(TAG, "onStart: started");
+//        Log.d(TAG, "onStart: started");
 //        updateUI(currentUser);
-        if (currentUser!=null){
-            Log.d(TAG, "onStart: currnet user is not null: "+ currentUser.getEmail());
+        if (currentUser!=null && currentUser.isEmailVerified()){
+            Log.d(TAG, "onStart: current user is not null: "+ currentUser.getEmail());
             startActivity(new Intent(GoogleSignInActivity.this, HomeActivity.class));
 
         }
