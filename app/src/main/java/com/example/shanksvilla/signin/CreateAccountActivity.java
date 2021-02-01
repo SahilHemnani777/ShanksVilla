@@ -49,7 +49,6 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createNewAccount();
-                finish();
             }
         });
     }
@@ -61,6 +60,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(mName) || TextUtils.isEmpty(mEmail) || TextUtils.isEmpty(mPassword)) {
             Toast.makeText(this, "Please enter all the details.", Toast.LENGTH_SHORT).show();
         }else{
+            //Success case- When email and passwords are correctly filled
             mAuth.createUserWithEmailAndPassword(mEmail, mPassword)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -69,15 +69,25 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-//                                Log.d(TAG, "onComplete: "+user.getUid());
-                                User ModelUser = new User(mName,"null",user.getUid(),mEmail);
-                                myRef.child("Users").child(user.getUid()).setValue(ModelUser);
-                                Toast.makeText(CreateAccountActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(CreateAccountActivity.this,GoogleSignInActivity.class));
+                                user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            Log.d(TAG, "onComplete: "+user.getUid());
+                                            User ModelUser = new User(mName,"null",user.getUid(),mEmail);
+                                            myRef.child("Users").child(user.getUid()).setValue(ModelUser);
+                                            Toast.makeText(CreateAccountActivity.this, "Registration Successful, please check email for verification", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(CreateAccountActivity.this,GoogleSignInActivity.class));
+                                        }else{
+                                            Toast.makeText(CreateAccountActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(CreateAccountActivity.this, GoogleSignInActivity.class));
+                                        }
+                                    }
+                                });
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(CreateAccountActivity.this, "Authentication failed.",
+                                Toast.makeText(CreateAccountActivity.this, "Authentication failed please ",
                                         Toast.LENGTH_SHORT).show();
 //                                updateUI(null);
                             }
