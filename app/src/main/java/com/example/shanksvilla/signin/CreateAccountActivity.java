@@ -79,6 +79,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                             Toast.makeText(CreateAccountActivity.this, "Registration Successful, please check email for verification", Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(CreateAccountActivity.this,GoogleSignInActivity.class));
                                         }else{
+                                            //if the task is not successful
                                             Toast.makeText(CreateAccountActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(CreateAccountActivity.this, GoogleSignInActivity.class));
                                         }
