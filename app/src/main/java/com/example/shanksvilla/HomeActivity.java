@@ -2,21 +2,28 @@ package com.example.shanksvilla;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private FragmentTransaction fragmentManager;
+    private BottomNavigationView bottomNavigationView;
+
     GoogleSignInClient mGoogleSignInClient;
+
     private static final String TAG = "HomeActivity";
 
     private Button buttonLogout;
@@ -28,26 +35,43 @@ public class HomeActivity extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        Log.d(TAG, "onCreate: started");
-        findViewById(R.id.logoutbtn).setOnClickListener(new View.OnClickListener() {
+
+        fragmentManager=getSupportFragmentManager().beginTransaction();
+
+        bottomNavigationView = findViewById(R.id.bnb);
+        bottomNavigationView.setSelectedItemId(R.id.itemHome);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                signOut();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.itemHome:
+                        HomeFragment homeFragment = new HomeFragment();
+                        fragmentManager.replace(R.id.fragmentHolder,homeFragment);
+                        fragmentManager.commit();
+
+                    case R.id.itemProfile:
+                        ProfileFragment profileFragment = new ProfileFragment();
+                        fragmentManager.replace(R.id.fragmentHolder,profileFragment);
+                        fragmentManager.commit();
+                }
+                return true;
             }
         });
-
-
         Log.d(TAG, "onCreate: finished");
     }
-    private void signOut() {
+    public void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        FirebaseAuth.getInstance().signOut();
                         finish();
                     }
                 });
     }
+
+
 }
