@@ -60,8 +60,7 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
-        Log.d(TAG, "onCreate: finished");
-    }
+        Log.d(TAG, "onCreate: finished"); }
     public void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
