@@ -3,6 +3,7 @@ package com.example.shanksvilla.signin;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -95,21 +96,28 @@ public class GoogleSignInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email= mEmail.getText().toString();
                 String pass= mPassword.getText().toString();
-                mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            if (user.isEmailVerified()){
-                                //If the user has verified his email address then he/she can login otherwise he can not
-                                startActivity(new Intent(GoogleSignInActivity.this,HomeActivity.class));
-                                finish();
+                if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass)){
+                    mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()){
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                if (user.isEmailVerified()){
+                                    //If the user has verified his email address then he/she can login otherwise he can not
+                                    startActivity(new Intent(GoogleSignInActivity.this,HomeActivity.class));
+                                    finish();
+                                }else{
+                                    Toast.makeText(GoogleSignInActivity.this, "Please verify your email address", Toast.LENGTH_SHORT).show();
+                                }
                             }else{
-                                Toast.makeText(GoogleSignInActivity.this, "Please verify your email address", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GoogleSignInActivity.this, "Please enter Valid Credentials", Toast.LENGTH_SHORT).show();
                             }
                         }
-                    }
-                });
+                    });
+                }else{
+                    Toast.makeText(GoogleSignInActivity.this, "Enter Email and Password", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 //        Log.d(TAG, "onCreate: finished");
@@ -167,8 +175,9 @@ public class GoogleSignInActivity extends AppCompatActivity {
 //        updateUI(currentUser);
         if (currentUser!=null && currentUser.isEmailVerified()){
             Log.d(TAG, "onStart: current user is not null: "+ currentUser.getEmail());
-            startActivity(new Intent(GoogleSignInActivity.this, HomeActivity.class));
-
+            startActivity(new Intent(GoogleSignInActivity.this, HomeActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME));
+            this.finish();
         }
         Log.d(TAG, "onStart: finished");
     }
