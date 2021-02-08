@@ -16,3 +16,10 @@
 
   <img alt="Github stars" src="https://img.shields.io/github/stars/SahilHemnani777/ShanksVilla?color=56BEB8" /> 
 </p>
+
+
+## Status
+
+<h4 align="center">
+	🚧  Hotel Booking App. 🚀 Under development...  🚧
+</h4>
