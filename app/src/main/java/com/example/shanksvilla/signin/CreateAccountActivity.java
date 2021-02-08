@@ -22,6 +22,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CreateAccountActivity extends AppCompatActivity {
     private static final String TAG = "CreateAccountActivity";
 
@@ -57,8 +60,18 @@ public class CreateAccountActivity extends AppCompatActivity {
         String mName = fullName.getText().toString();
         String mEmail = email.getText().toString();
         String mPassword= password.getText().toString();
+
+        PasswordValidator passwordValidator = new PasswordValidator();
+        boolean isValid= passwordValidator.validate(mPassword);
+        
         if (TextUtils.isEmpty(mName) || TextUtils.isEmpty(mEmail) || TextUtils.isEmpty(mPassword)) {
             Toast.makeText(this, "Please enter all the details.", Toast.LENGTH_SHORT).show();
+        }else if(!isValid){
+            Toast.makeText(this, "Be between 8 and 40 characters long\n" +
+                    "Contain at least one digit.\n" +
+                    "Contain at least one lower case character.\n" +
+                    "Contain at least one upper case character.\n" +
+                    "Contain at least on special character from [ @ # $ % ! . ].", Toast.LENGTH_LONG).show();
         }else{
             //Success case- When email and passwords are correctly filled
             mAuth.createUserWithEmailAndPassword(mEmail, mPassword)
@@ -95,6 +108,24 @@ public class CreateAccountActivity extends AppCompatActivity {
                         }
                     });
 
+
+        }
+    }
+    public class PasswordValidator {
+
+        private Pattern pattern;
+        private Matcher matcher;
+
+        private static final String PASSWORD_PATTERN = "((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,40})";
+
+        public PasswordValidator() {
+            pattern = Pattern.compile(PASSWORD_PATTERN);
+        }
+
+        public boolean validate(final String password) {
+
+            matcher = pattern.matcher(password);
+            return matcher.matches();
 
         }
     }
