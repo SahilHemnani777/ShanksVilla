@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShanksVilla">
         <activity android:name=".signin.CreateAccountActivity"></activity>
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".home.HomeActivity" />
         <activity android:name=".signin.GoogleSignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
