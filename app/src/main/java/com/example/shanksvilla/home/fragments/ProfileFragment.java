@@ -1,4 +1,4 @@
-package com.example.shanksvilla;
+package com.example.shanksvilla.home.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.shanksvilla.R;
+import com.example.shanksvilla.home.HomeActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

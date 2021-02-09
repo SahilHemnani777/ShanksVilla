@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.shanksvilla.HomeActivity;
+import com.example.shanksvilla.home.HomeActivity;
 import com.example.shanksvilla.R;
 import com.example.shanksvilla.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
