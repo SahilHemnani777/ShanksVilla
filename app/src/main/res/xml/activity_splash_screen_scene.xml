@@ -7,7 +7,7 @@
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="2000"
-        motion:staggered="0.65"
+        motion:staggered=".4"
         motion:autoTransition="animateToEnd">
        <KeyFrameSet>
        </KeyFrameSet>
