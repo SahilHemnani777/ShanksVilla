@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.shanksvilla.R;
 import com.example.shanksvilla.home.fragments.HomeFragment;
@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private FragmentTransaction fragmentManager;
+    private FragmentManager fragmentManager;
     private BottomNavigationView bottomNavigationView;
 
     GoogleSignInClient mGoogleSignInClient;
@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        fragmentManager=getSupportFragmentManager().beginTransaction();
+        fragmentManager=getSupportFragmentManager();
 
         bottomNavigationView = findViewById(R.id.bnb);
         bottomNavigationView.setSelectedItemId(R.id.itemHome);
@@ -52,18 +52,21 @@ public class HomeActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.itemHome:
                         HomeFragment homeFragment = new HomeFragment();
-                        fragmentManager.replace(R.id.fragmentHolder,homeFragment);
-                        fragmentManager.commit();
+                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,homeFragment,null).commit();
+                        break;
 
                     case R.id.itemProfile:
                         ProfileFragment profileFragment = new ProfileFragment();
-                        fragmentManager.replace(R.id.fragmentHolder,profileFragment);
-                        fragmentManager.commit();
+                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,profileFragment,null).commit();
+                        break;
                 }
                 return true;
             }
         });
-        Log.d(TAG, "onCreate: finished"); }
+        Log.d(TAG, "onCreate: finished");
+    }
+
+
     public void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
@@ -74,6 +77,4 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
 }
