@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.shanksvilla.R;
+import com.example.shanksvilla.home.fragments.BookingFragment;
+import com.example.shanksvilla.home.fragments.DescriptionFragment;
 import com.example.shanksvilla.home.fragments.HomeFragment;
 import com.example.shanksvilla.home.fragments.ProfileFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -42,6 +44,8 @@ public class HomeActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         fragmentManager=getSupportFragmentManager();
+        HomeFragment homeFragment = new HomeFragment();
+        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,homeFragment,null).commit();
 
         bottomNavigationView = findViewById(R.id.bnb);
         bottomNavigationView.setSelectedItemId(R.id.itemHome);
@@ -58,6 +62,16 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.itemProfile:
                         ProfileFragment profileFragment = new ProfileFragment();
                         fragmentManager.beginTransaction().replace(R.id.fragmentHolder,profileFragment,null).commit();
+                        break;
+
+                    case R.id.itemAboutUs:
+                        DescriptionFragment descriptionFragment = new DescriptionFragment();
+                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,descriptionFragment,null).commit();
+                        break;
+
+                    case R.id.itemBook:
+                        BookingFragment bookingFragment = new BookingFragment();
+                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,bookingFragment,null).commit();
                         break;
                 }
                 return true;
