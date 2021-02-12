@@ -33,4 +33,11 @@
         android:layout_marginTop="85dp"
         android:text="going today?"
         android:textSize="32sp" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/ViewPagerforKBN"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginTop="150dp"></androidx.viewpager2.widget.ViewPager2>
+
 </FrameLayout>
