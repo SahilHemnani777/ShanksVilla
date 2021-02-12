@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 
 
 
-public class ProfileFragment extends Fragment {
+public class    ProfileFragment extends Fragment {
     public static final String FRAGMENT_TAG="PROFILE_FRAGMENT_TAG";
     // UI Elements
     private ShapeableImageView profileImgIv;
