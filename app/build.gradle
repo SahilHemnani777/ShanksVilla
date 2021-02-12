@@ -45,4 +45,15 @@ dependencies {
 
     //Dependency for Google SignIn
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
+
+    //Dependencies for Image courseal
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.flaviofaria:kenburnsview:1.0.7'
+
+
+
+
+
 }
