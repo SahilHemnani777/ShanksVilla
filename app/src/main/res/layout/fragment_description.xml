@@ -37,7 +37,22 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/ViewPagerforKBN"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_marginTop="150dp"></androidx.viewpager2.widget.ViewPager2>
+        android:layout_height="450dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        ></androidx.viewpager2.widget.ViewPager2>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|fill_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="650dp"
+        android:foregroundGravity="bottom|center|center_horizontal"
+        android:text="ShanksVilla"
+        android:textSize="32sp"
+        android:textStyle="bold|italic" />
 
 </FrameLayout>

@@ -18,7 +18,7 @@ public class DescriptionFragment extends Fragment {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
-    private static final int NUM_PAGES = 5;
+    private static final int NUM_PAGES = 14;
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
      * and next wizard steps.
@@ -62,7 +62,7 @@ public class DescriptionFragment extends Fragment {
 
         @Override
         public Fragment createFragment(int position) {
-            return new kbnFragment();
+            return new kbnFragment(position);
         }
 
         @Override
