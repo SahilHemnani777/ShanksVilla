@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShanksVilla">
+        <activity android:name=".home.BookingActivity"></activity>
         <activity android:name=".splash.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -19,8 +21,6 @@
         <activity android:name=".home.HomeActivity" />
         <activity android:name=".signin.GoogleSignInActivity">
             <intent-filter>
-
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
