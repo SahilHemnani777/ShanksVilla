@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.shanksvilla.R;
-import com.example.shanksvilla.home.fragments.BookingFragment;
 import com.example.shanksvilla.home.fragments.DescriptionFragment;
 import com.example.shanksvilla.home.fragments.HomeFragment;
 import com.example.shanksvilla.home.fragments.ProfileFragment;
@@ -70,8 +69,11 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case R.id.itemBook:
-                        BookingFragment bookingFragment = new BookingFragment();
-                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,bookingFragment,null).commit();
+
+
+//                        loading the BookingActivity because it'll be the main Activity
+//                        BookingFragment bookingFragment = new BookingFragment();
+//                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,bookingFragment,null).commit();
                         break;
                 }
                 return true;
