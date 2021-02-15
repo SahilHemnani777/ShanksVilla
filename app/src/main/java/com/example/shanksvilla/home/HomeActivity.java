@@ -1,5 +1,6 @@
 package com.example.shanksvilla.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -70,8 +71,8 @@ public class HomeActivity extends AppCompatActivity {
 
                     case R.id.itemBook:
 
-
 //                        loading the BookingActivity because it'll be the main Activity
+                        startActivity(new Intent(HomeActivity.this, BookingActivity.class));
 //                        BookingFragment bookingFragment = new BookingFragment();
 //                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,bookingFragment,null).commit();
                         break;
