@@ -12,7 +12,7 @@ import com.example.shanksvilla.signin.GoogleSignInActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN_TIME_OUT=3000;
+    private static int SPLASH_SCREEN_TIME_OUT=1500;
 //   After completion of 2000 ms, the next activity will get started.
 
     @Override

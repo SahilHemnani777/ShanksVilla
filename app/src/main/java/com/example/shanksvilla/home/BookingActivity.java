@@ -29,7 +29,11 @@ public class BookingActivity extends AppCompatActivity {
         calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                Log.d(TAG, "onSelectedDayChange: date"+ i );
+                // i2 -> day
+                // i1 -> month - 1
+                // i -> year
+                Log.d(TAG, "onSelectedDayChange: date"+ i2 +"-"+ (i1+1) +"-"+ i);
+                date.setText(i2 +"-"+ (i1+1) +"-"+ i);
             }
         });
     }
