@@ -1,5 +1,6 @@
 package com.example.shanksvilla.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -78,7 +79,7 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (Integer.valueOf(peoples.getText().toString()) >8){
-//                    Intent intent = new Intent(BookingActivity.this, BookingActivity2.class);
+                    Intent intent = new Intent(BookingActivity.this, BookingActivity2.class);
                 }
             }
         });
