@@ -1,6 +1,7 @@
 package com.example.shanksvilla.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
@@ -11,8 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shanksvilla.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.text.DecimalFormat;
 
 public class BookingActivity extends AppCompatActivity {
     private static final String TAG = "BookingActivity";
@@ -31,6 +31,15 @@ public class BookingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
+
+
+
+        setDate(17, 2 , 2021, startDate);
+
+
+
+
+
 
         btnSet= findViewById(R.id.buttonSet);
         calender= findViewById(R.id.calendarView);
@@ -67,6 +76,17 @@ public class BookingActivity extends AppCompatActivity {
         });
 
 
+    }
+    public void setDate(int d, int m, int y, int date){
+        //hashing method...
+        DecimalFormat formatter = new DecimalFormat("00");
+//        String dnew = formatter.format(d);
+        String mnew = formatter.format(m);
+        date= (y*10000) + (Integer.valueOf(mnew) * 100) + d;
+        Log.d(TAG, "setDate: "+ date);
+    }
+}
+
 
 //        dateFrom.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -87,17 +107,13 @@ public class BookingActivity extends AppCompatActivity {
 //        });
 
 
-
-
-    }
-    public String getDate(long milliSeconds, String dateFormat)
-    {
-        // Create a DateFormatter object for displaying date in specified format.
-        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
-
-        // Create a calendar object that will convert the date and time value in milliseconds to date.
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(milliSeconds);
-        return formatter.format(calendar.getTime());
-    }
-}
+//    public String getDate(long milliSeconds, String dateFormat)
+//    {
+//        // Create a DateFormatter object for displaying date in specified format.
+//        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+//
+//        // Create a calendar object that will convert the date and time value in milliseconds to date.
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTimeInMillis(milliSeconds);
+//        return formatter.format(calendar.getTime());
+//    }
