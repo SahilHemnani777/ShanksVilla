@@ -2,8 +2,10 @@ package com.example.shanksvilla.home;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +18,7 @@ import java.text.DecimalFormat;
 
 public class BookingActivity extends AppCompatActivity {
     private static final String TAG = "BookingActivity";
-    private Button btnSet;
+    private Button btnSearch;
     private CalendarView calender;
     private TextView dateFrom;
     private TextView dateTo;
@@ -25,6 +27,8 @@ public class BookingActivity extends AppCompatActivity {
     public int counter=0;
     public         int x=0,y=0,z=0;
 
+    private EditText peoples;
+
 
 
     @Override
@@ -32,11 +36,12 @@ public class BookingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
-        btnSet= findViewById(R.id.buttonSet);
+        btnSearch= findViewById(R.id.buttonSet);
         calender= findViewById(R.id.calendarView);
         dateFrom= findViewById(R.id.datefrom);
         dateTo= findViewById(R.id.dateto);
         displayText= findViewById(R.id.textDisplay);
+        peoples = findViewById(R.id.peoples);
 
         displayText.setText("Select the starting date");
 
@@ -65,6 +70,15 @@ public class BookingActivity extends AppCompatActivity {
                     }else{
                         Toast.makeText(BookingActivity.this, "End date can't be before start date", Toast.LENGTH_SHORT).show();
                     }
+                }
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Integer.valueOf(peoples.getText().toString()) >8){
+//                    Intent intent = new Intent(BookingActivity.this, BookingActivity2.class);
                 }
             }
         });

@@ -22,7 +22,7 @@
         android:id="@+id/buttonSet"
         android:layout_width="100dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="16dp"
         android:text="Search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,13 +33,13 @@
         android:id="@+id/datefrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="32dp"
         android:text="From"
         android:textColor="@android:color/holo_blue_bright"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/calendarView"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="@+id/calendarView"
         app:layout_constraintTop_toBottomOf="@+id/textDisplay" />
 
@@ -77,5 +77,32 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/peoples"
+        android:layout_width="51dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="52dp"
+        android:ems="10"
+        android:hint="0 - 8"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSet"
+        app:layout_constraintStart_toStartOf="@+id/datefrom"
+        app:layout_constraintTop_toBottomOf="@+id/dateto"
+        app:layout_constraintVertical_bias="0.552" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No. of people"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/peoples"
+        app:layout_constraintEnd_toStartOf="@+id/peoples"
+        app:layout_constraintHorizontal_bias="0.813"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/peoples"
+        app:layout_constraintVertical_bias="0.55" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
