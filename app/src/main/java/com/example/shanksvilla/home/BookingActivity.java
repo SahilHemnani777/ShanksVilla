@@ -78,8 +78,14 @@ public class BookingActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Integer.valueOf(peoples.getText().toString()) >8){
+                if (Integer.valueOf(peoples.getText().toString()) <9){
                     Intent intent = new Intent(BookingActivity.this, BookingActivity2.class);
+                    intent.putExtra("startDate", startDate);
+                    intent.putExtra("endDate", endDate);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(BookingActivity.this, "Select no. of people less than 8", Toast.LENGTH_SHORT).show();
                 }
             }
         });
