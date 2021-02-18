@@ -32,15 +32,6 @@ public class BookingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
-
-
-        setDate(17, 2 , 2021, startDate);
-
-
-
-
-
-
         btnSet= findViewById(R.id.buttonSet);
         calender= findViewById(R.id.calendarView);
         dateFrom= findViewById(R.id.datefrom);
@@ -59,6 +50,7 @@ public class BookingActivity extends AppCompatActivity {
 
 //                    Log.d(TAG, "onSelectedDayChange: date"+ i2 +"-"+ (i1+1) +"-"+ i);
                     dateFrom.setText(i2 +"-"+ (i1+1) +"-"+ i);
+                    setDate(i2, (i1+1), i, startDate);
                     x=i2;
                     y=i1;
                     z=i;
@@ -68,6 +60,8 @@ public class BookingActivity extends AppCompatActivity {
 //                    Log.d(TAG, "onSelectedDayChange: "+x+y+z);
                     if (i2>x && i1 >=y && i >=z){
                         dateTo.setText(i2 +"-"+ (i1+1) +"-"+ i);
+                        setDate(i2, (i1+1), i, endDate);
+                        displayText.setText("Select no. of people");
                     }else{
                         Toast.makeText(BookingActivity.this, "End date can't be before start date", Toast.LENGTH_SHORT).show();
                     }
