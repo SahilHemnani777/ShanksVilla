@@ -56,7 +56,7 @@ public class BookingActivity extends AppCompatActivity {
 
 //                    Log.d(TAG, "onSelectedDayChange: date"+ i2 +"-"+ (i1+1) +"-"+ i);
                     dateFrom.setText(i2 +"-"+ (i1+1) +"-"+ i);
-                    setDate(i2, (i1+1), i, startDate);
+                    startDate= setDate(i2, (i1+1), i, startDate);
                     x=i2;
                     y=i1;
                     z=i;
@@ -66,7 +66,7 @@ public class BookingActivity extends AppCompatActivity {
 //                    Log.d(TAG, "onSelectedDayChange: "+x+y+z);
                     if (i2>x && i1 >=y && i >=z){
                         dateTo.setText(i2 +"-"+ (i1+1) +"-"+ i);
-                        setDate(i2, (i1+1), i, endDate);
+                        endDate= setDate(i2, (i1+1), i, endDate);
                         displayText.setText("Select no. of people");
                     }else{
                         Toast.makeText(BookingActivity.this, "End date can't be before start date", Toast.LENGTH_SHORT).show();
@@ -92,13 +92,14 @@ public class BookingActivity extends AppCompatActivity {
 
 
     }
-    public void setDate(int d, int m, int y, int date){
+    public int setDate(int d, int m, int y, int date){
         //hashing method...
         DecimalFormat formatter = new DecimalFormat("00");
 //        String dnew = formatter.format(d);
         String mnew = formatter.format(m);
         date= (y*10000) + (Integer.valueOf(mnew) * 100) + d;
         Log.d(TAG, "setDate: "+ date);
+        return date;
     }
 }
 
