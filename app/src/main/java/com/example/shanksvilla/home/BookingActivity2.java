@@ -2,6 +2,7 @@ package com.example.shanksvilla.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,9 +18,12 @@ public class BookingActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_booking2);
 
         Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
         date= findViewById(R.id.datestartend);
 //        Log.d(TAG, "onCreate: " +intent.getIntExtra("startDate", 0));
 //        Log.d(TAG, "onCreate: "+intent.getExtras().getInt("endDate"));
+        Log.d(TAG, "onCreate: "+ bundle.getInt("startDate"));
+        Log.d(TAG, "onCreate: "+ bundle.getInt("endDate"));
 
     }
 }
