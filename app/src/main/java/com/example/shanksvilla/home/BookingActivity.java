@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.shanksvilla.R;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 
 public class BookingActivity extends AppCompatActivity {
     private static final String TAG = "BookingActivity";
@@ -29,6 +30,10 @@ public class BookingActivity extends AppCompatActivity {
     public         int x=0,y=0,z=0;
 
     private EditText peoples;
+
+//added to solve the issue with staring date less than current date
+    private SimpleDateFormat dateFormat;
+    private String CurrentDate;
 
 
 
@@ -46,25 +51,43 @@ public class BookingActivity extends AppCompatActivity {
 
         displayText.setText("Select the starting date");
 
+
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        CurrentDate = dateFormat.format(calender.getDate());
+        Log.d(TAG, "onCreate: date" + CurrentDate);
+//        Log.d(TAG, "onCreate: getDate" + calender.getDate());
+
         calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 // i2 -> day
                 // i1 -> month - 1
                 // i -> year
+
+                String CurrentDay= CurrentDate.substring(0,2);
+                int intCurrentDay= Integer.valueOf(CurrentDay);
+//                Log.d(TAG, "onSelectedDayChange: "+ CurrentDay);
+//                Log.d(TAG, "onSelectedDayChange: "+ intCurrentDay);
                 if (counter==0){
 
 //                    Log.d(TAG, "onSelectedDayChange: date"+ i2 +"-"+ (i1+1) +"-"+ i);
-                    dateFrom.setText(i2 +"-"+ (i1+1) +"-"+ i);
-                    startDate= setDate(i2, (i1+1), i, startDate);
-                    x=i2;
-                    y=i1;
-                    z=i;
-                    counter++;
-                    displayText.setText("Now select the end date");
+
+                    if (i2<intCurrentDay){
+                        //if the date selected is less then the todays date
+                        Toast.makeText(BookingActivity.this, "Staring date should not be less the Today's Date", Toast.LENGTH_SHORT).show();
+                    }else{
+                        dateFrom.setText(i2 +"-"+ (i1+1) +"-"+ i);
+                        startDate= setDate(i2, (i1+1), i, startDate);
+                        x=i2;
+                        y=i1;
+                        z=i;
+                        counter++;
+                        displayText.setText("Now select the end date");
+                    }
+
                 }else{
 //                    Log.d(TAG, "onSelectedDayChange: "+x+y+z);
-                    if (i2>x && i1 >=y && i >=z){
+                    if (i2>=x && i1 >=y && i >=z){
                         dateTo.setText(i2 +"-"+ (i1+1) +"-"+ i);
                         endDate= setDate(i2, (i1+1), i, endDate);
                         displayText.setText("Select no. of people");
