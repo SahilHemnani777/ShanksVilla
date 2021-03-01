@@ -25,8 +25,5 @@
 </h4>
 
 
-        //strat date less than todays date
-        //clearing the date
-        //0 nhi
         //google logo hato shnak villa ka logo
         //login baadme

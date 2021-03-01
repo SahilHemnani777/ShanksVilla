@@ -84,7 +84,7 @@
         android:layout_height="47dp"
         android:layout_marginStart="80dp"
         android:ems="10"
-        android:hint="0 - 8"
+        android:hint="1 - 8"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toTopOf="@+id/buttonSet"
         app:layout_constraintStart_toStartOf="@+id/datefrom"
