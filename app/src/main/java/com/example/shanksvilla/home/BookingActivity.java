@@ -30,6 +30,7 @@ public class BookingActivity extends AppCompatActivity {
     public         int x=0,y=0,z=0;
 
     private EditText peoples;
+    private Button btnClear;
 
 //added to solve the issue with staring date less than current date
     private SimpleDateFormat dateFormat;
@@ -95,6 +96,20 @@ public class BookingActivity extends AppCompatActivity {
                         Toast.makeText(BookingActivity.this, "End date can't be before start date", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+
+        btnClear= findViewById(R.id.buttonClear);
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                counter=0;
+                x=0;y=0;z=0;
+                displayText.setText("Select the starting date");
+                dateFrom.setText("From");
+                dateTo.setText("To");
+                Toast.makeText(BookingActivity.this, "Cleared date", Toast.LENGTH_SHORT).show();
+
             }
         });
 
