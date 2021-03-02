@@ -79,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
                         }else{
                             snackBar.show();
                         }
+                        break;
 
 
 

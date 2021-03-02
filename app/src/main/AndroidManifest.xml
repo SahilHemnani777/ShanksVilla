@@ -13,8 +13,8 @@
         <activity android:name=".home.BookingActivity" />
         <activity android:name=".splash.SplashScreenActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
