@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -14,22 +15,26 @@ import com.example.shanksvilla.R;
 import com.example.shanksvilla.home.fragments.DescriptionFragment;
 import com.example.shanksvilla.home.fragments.HomeFragment;
 import com.example.shanksvilla.home.fragments.ProfileFragment;
+import com.example.shanksvilla.signin.GoogleSignInActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
-
+    private FirebaseAuth mAuth;
     private FragmentManager fragmentManager;
     private BottomNavigationView bottomNavigationView;
 
     GoogleSignInClient mGoogleSignInClient;
 
     private static final String TAG = "HomeActivity";
+    private Snackbar snackBar;
 
     private Button buttonLogout;
     @Override
@@ -42,6 +47,13 @@ public class HomeActivity extends AppCompatActivity {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        mAuth= FirebaseAuth.getInstance();
+
+        //setting up the snack bar for the login
+        snackBar= Snackbar.make(findViewById(R.id.home_layout), "Please login for the action", BaseTransientBottomBar.LENGTH_SHORT);
+        snackBar.setAction("Login", new LoginListener());
+
+
 
         fragmentManager=getSupportFragmentManager();
         HomeFragment homeFragment = new HomeFragment();
@@ -60,9 +72,15 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case R.id.itemProfile:
-                        ProfileFragment profileFragment = new ProfileFragment();
-                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,profileFragment,null).commit();
-                        break;
+                        if (mAuth.getCurrentUser()!=null){
+                            ProfileFragment profileFragment = new ProfileFragment();
+                            fragmentManager.beginTransaction().replace(R.id.fragmentHolder,profileFragment,null).commit();
+                            break;
+                        }else{
+                            snackBar.show();
+                        }
+
+
 
                     case R.id.itemAboutUs:
                         DescriptionFragment descriptionFragment = new DescriptionFragment();
@@ -93,5 +111,15 @@ public class HomeActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+    }
+
+    //class for the listener on the snackBar
+    class LoginListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            Intent intent= new Intent(HomeActivity.this, GoogleSignInActivity.class);
+            startActivity(intent);
+        }
     }
 }
