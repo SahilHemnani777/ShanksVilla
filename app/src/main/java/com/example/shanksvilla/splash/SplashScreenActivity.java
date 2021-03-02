@@ -8,7 +8,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shanksvilla.R;
-import com.example.shanksvilla.signin.GoogleSignInActivity;
+import com.example.shanksvilla.home.HomeActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -26,7 +26,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent i=new Intent(SplashScreenActivity.this,
-                        GoogleSignInActivity.class);
+                        HomeActivity.class);
                 //Intent is used to switch from one activity to another.
 
                 startActivity(i);
