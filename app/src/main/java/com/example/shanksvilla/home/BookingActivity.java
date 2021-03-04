@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +20,7 @@ import com.example.shanksvilla.R;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
-public class BookingActivity extends AppCompatActivity {
+public class BookingActivity extends AppCompatActivity{
     private static final String TAG = "BookingActivity";
     private Button btnSearch;
     private CalendarView calender;
@@ -29,7 +31,7 @@ public class BookingActivity extends AppCompatActivity {
     public int counter=0;
     public         int x=0,y=0,z=0;
 
-    private EditText peoples;
+    private TextView peoples;
     private Button btnClear;
 
 //added to solve the issue with staring date less than current date
@@ -37,11 +39,36 @@ public class BookingActivity extends AppCompatActivity {
     private String CurrentDate;
 
 
+//Integer array for selecting the number of seats
+    String[] persons= {"1", "2", "3", "4", "5", "6", "7", "8"};
+
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
+
+        spinner= findViewById(R.id.spinner);
+
+        //Array adapter to bind array to spinner
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,persons);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        spinner.setAdapter(aa);
+        
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG, "onItemSelected: ufbubfbubeubfefbe" + persons[position]);
+                peoples.setText(persons[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         btnSearch= findViewById(R.id.buttonSet);
         calender= findViewById(R.id.calendarView);
@@ -116,16 +143,14 @@ public class BookingActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Integer.valueOf(peoples.getText().toString()) >9 || Integer.valueOf(peoples.getText().toString())==0 ){
-                    Toast.makeText(BookingActivity.this, "Select no. of people less than 8 and not equal to 0", Toast.LENGTH_SHORT).show();
-                }else{
                     Intent intent = new Intent(BookingActivity.this, BookingActivity2.class);
                     intent.putExtra("startDate", startDate);
                     intent.putExtra("endDate", endDate);
+                    intent.putExtra("count", Integer.valueOf(peoples.getText().toString()));
                     startActivity(intent);
                     finish();
                 }
-            }
+
         });
 
 
@@ -139,6 +164,17 @@ public class BookingActivity extends AppCompatActivity {
         Log.d(TAG, "setDate: "+ date);
         return date;
     }
+
+//    @Override
+//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        Log.d(TAG, "onItemSelected: vuvvuvuvuvvvvu");
+//        displayText.setText(persons[position]);
+//    }
+//
+//    @Override
+//    public void onNothingSelected(AdapterView<?> parent) {
+//
+//    }
 }
 
 
