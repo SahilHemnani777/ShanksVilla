@@ -24,6 +24,7 @@ public class BookingActivity2 extends AppCompatActivity {
 //        Log.d(TAG, "onCreate: "+intent.getExtras().getInt("endDate"));
         Log.d(TAG, "onCreate: "+ bundle.getInt("startDate"));
         Log.d(TAG, "onCreate: "+ bundle.getInt("endDate"));
+        Log.d(TAG, "onCreate: "+ bundle.getInt("count"));
 
     }
 }
