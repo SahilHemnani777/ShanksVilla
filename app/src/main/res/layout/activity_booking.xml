@@ -8,8 +8,8 @@
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="373dp"
-        android:layout_height="306dp"
+        android:layout_width="330dp"
+        android:layout_height="305dp"
         android:dateTextAppearance="@style/TextAppearance.AppCompat.Large"
         android:minDate="01/01/2021"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,13 +33,13 @@
         android:id="@+id/datefrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:text="From"
         android:textColor="@android:color/holo_blue_bright"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/calendarView"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="@+id/calendarView"
         app:layout_constraintTop_toBottomOf="@+id/textDisplay" />
 
@@ -85,7 +85,7 @@
         android:layout_marginStart="224dp"
         android:clickable="false"
         android:ems="10"
-        android:hint="1 - 8"
+        android:hint="1 - 20"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,5 +127,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView7"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="No. of days"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/dateto" />
+
+    <TextView
+        android:id="@+id/days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="1-30"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/dateto" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="55dp"
+        android:layout_height="32dp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:foreground="@color/cardview_dark_background"
+        app:layout_constraintStart_toEndOf="@+id/days"
+        app:layout_constraintTop_toBottomOf="@+id/dateto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

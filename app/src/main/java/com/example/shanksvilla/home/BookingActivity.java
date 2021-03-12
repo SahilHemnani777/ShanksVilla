@@ -37,12 +37,17 @@ public class BookingActivity extends AppCompatActivity{
 //added to solve the issue with staring date less than current date
     private SimpleDateFormat dateFormat;
     private String CurrentDate;
+    private TextView days;
+
 
 
 //Integer array for selecting the number of seats
-    String[] persons= {"1", "2", "3", "4", "5", "6", "7", "8"};
+    String[] persons= {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19","20"};
+    String[] no_of_days= {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14",
+            "15", "16", "17", "18", "19","20","21","22","23","24","25", "26", "27", "28", "29", "30"};
 
     private Spinner spinner;
+    private Spinner spinner2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,8 @@ public class BookingActivity extends AppCompatActivity{
         setContentView(R.layout.activity_booking);
 
         spinner= findViewById(R.id.spinner);
+        spinner2= findViewById(R.id.spinner2);
+        days = findViewById(R.id.days);
 
         //Array adapter to bind array to spinner
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,persons);
@@ -69,6 +76,31 @@ public class BookingActivity extends AppCompatActivity{
 
             }
         });
+
+
+        //Array adapter to bind array to spinner
+        ArrayAdapter bb = new ArrayAdapter(this,android.R.layout.simple_spinner_item,no_of_days);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        spinner2.setAdapter(bb);
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                Log.d(TAG, "onItemSelected: ufbubfbubeubfefbe" + persons[position]);
+                days.setText(no_of_days[position]);
+
+                Log.d(TAG, "onItemSelected: "+spinner2.getPrompt());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
 
         btnSearch= findViewById(R.id.buttonSet);
         calender= findViewById(R.id.calendarView);
@@ -158,6 +190,7 @@ public class BookingActivity extends AppCompatActivity{
                     intent.putExtra("startDate", startDate);
                     intent.putExtra("endDate", endDate);
                     intent.putExtra("count", Integer.valueOf(peoples.getText().toString()));
+                    intent.putExtra("days", Integer.valueOf(days.getText().toString()));
                     startActivity(intent);
                     finish();
                 }

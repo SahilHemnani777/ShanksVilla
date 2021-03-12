@@ -42,6 +42,7 @@ public class BookingActivity2 extends AppCompatActivity {
         people = bundle.getInt("count");
 
 
+
         myRef.child("database").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -60,6 +61,7 @@ public class BookingActivity2 extends AppCompatActivity {
 //        Log.d(TAG, "onCreate: "+ reverse(bundle.getInt("startDate")));
 //        Log.d(TAG, "onCreate: "+ reverse(bundle.getInt("endDate")));
 //        Log.d(TAG, "onCreate: "+ bundle.getInt("count"));
+//        Log.d(TAG, "onCreate: "+ bundle.getInt("days"));
 
 
     }
