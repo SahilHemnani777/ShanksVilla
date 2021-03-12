@@ -3,6 +3,7 @@ package com.example.shanksvilla.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 
@@ -24,8 +24,6 @@ public class BookingActivity2 extends AppCompatActivity {
     private String startDate;
     private String endDate;
     private int people;
-    private ArrayList<String> emptyrooms = new ArrayList<>();
-
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
 
@@ -34,27 +32,26 @@ public class BookingActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking2);
 
-        for (int i = 0; i < 8; i++) {
-            emptyrooms.add("");
-        }
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         date = findViewById(R.id.datestartend);
         startDate = String.valueOf(reverse(bundle.getInt("startDate")));
+        // start date and end date in String format--> ddMMyyyy
         endDate = String.valueOf(reverse(bundle.getInt("endDate")));
         people = bundle.getInt("count");
+
 
         myRef.child("database").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                search(snapshot);
+                if (search(snapshot))
+                    Toast.makeText(BookingActivity2.this, "Found", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(BookingActivity2.this, "Not found", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -89,33 +86,22 @@ public class BookingActivity2 extends AppCompatActivity {
 //                    Log.d(TAG, "onDataChange: "+ date.getKey());
             if (date.getKey().toString().equals(startDate)) {
 //                        Toast.makeText(BookingActivity2.this, "found: " + date.getKey().toString(), Toast.LENGTH_SHORT).show();
-                String h1r1 = date.child("H1R1").getValue().toString();
-                String h1r2 = date.child("H1R2").getValue().toString();
-                String h1r3 = date.child("H1R3").getValue().toString();
-                String h1r4 = date.child("H1R4").getValue().toString();
-                String h2r1 = date.child("H2R1").getValue().toString();
-                String h2r2 = date.child("H2R2").getValue().toString();
-                String h2r3 = date.child("H2R3").getValue().toString();
-                String h2r4 = date.child("H2R4").getValue().toString();
-                ArrayList<String> rooms = new ArrayList<>();
-
-                rooms.add(h1r1);
-                rooms.add(h1r2);
-                rooms.add(h1r3);
-                rooms.add(h1r4);
-                rooms.add(h2r1);
-                rooms.add(h2r2);
-                rooms.add(h2r3);
-                rooms.add(h2r4);
-                if (rooms == emptyrooms) {
-                    continue;
-                }
-            }if(date.getKey().toString().equals(endDate)){
+                String vacancies = date.child("vacancies").getValue().toString();
 
             }
-
-
         }
         return true;
     }
+
+//    private int calcuate_days (String start, String end ){
+//        if (start.equals(end)){
+//            return 1;
+//        }
+//        if (start.substring(6).equals(end.substring(6)) && start.substring(2,4).equals(end.substring(2,4))){
+//            // same year and same month
+//            return (Integer.valueOf(end)-Integer.valueOf(start))/1000000;
+//        }
+//        if ()
+//        return 0;
+//    }
 }
