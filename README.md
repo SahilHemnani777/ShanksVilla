@@ -23,7 +23,3 @@
 <h4 align="center">
 	🚧  Hotel Booking App. 🚀 Under development...  🚧
 </h4>
-
-
-        //google logo hato shnak villa ka logo
-        //login baadme- started work in login-reframe branch
