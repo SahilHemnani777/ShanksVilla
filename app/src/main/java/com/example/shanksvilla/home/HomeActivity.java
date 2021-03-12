@@ -505,7 +505,7 @@ public class HomeActivity extends AppCompatActivity {
 
         DecimalFormat formatter = new DecimalFormat("00");
 
-        ArrayList<String> cal = new ArrayList<>(123);
+        ArrayList<String> cal = new ArrayList<>();
 
         String strNew = dates.replace("-", "");
 
@@ -521,13 +521,10 @@ public class HomeActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate: "+ cal);
 
-
-//        dbRef dbref = new dbRef();
-//        myRef.child("database").setValue(dbref);
-
-
         for(int i =0; i<cal.size(); i++){
             myRef.child("database").child(cal.get(i)).child("vacancies").setValue(20);
+//            myRef.child("database").child(cal.get(i)).child("allotted").setValue(i);
+
         }
     }
 }

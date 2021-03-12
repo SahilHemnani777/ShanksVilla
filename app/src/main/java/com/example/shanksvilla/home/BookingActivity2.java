@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 
@@ -24,6 +25,10 @@ public class BookingActivity2 extends AppCompatActivity {
     private String startDate;
     private String endDate;
     private int people;
+    private int days;
+
+
+    private ArrayList<String> is_available = new ArrayList<>(days);
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
 
@@ -40,19 +45,22 @@ public class BookingActivity2 extends AppCompatActivity {
         // start date and end date in String format--> ddMMyyyy
         endDate = String.valueOf(reverse(bundle.getInt("endDate")));
         people = bundle.getInt("count");
+        days= bundle.getInt("days");
 
 
 
         myRef.child("database").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (search(snapshot))
+                if (search(snapshot)){
                     Toast.makeText(BookingActivity2.this, "Found", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(BookingActivity2.this, "Not found", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(BookingActivity2.this, "Not found", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -85,25 +93,19 @@ public class BookingActivity2 extends AppCompatActivity {
 
         while (items.hasNext()) {
             DataSnapshot date = items.next();
-//                    Log.d(TAG, "onDataChange: "+ date.getKey());
             if (date.getKey().toString().equals(startDate)) {
-//                        Toast.makeText(BookingActivity2.this, "found: " + date.getKey().toString(), Toast.LENGTH_SHORT).show();
-                String vacancies = date.child("vacancies").getValue().toString();
-
+                if (Integer.valueOf(date.child("vacancies").getValue().toString())>=people && items.hasNext()){
+                    while(!items.next().getKey().toString().equals(endDate)){
+                        DataSnapshot x= items.next();
+                        if (Integer.valueOf(x.child("vacancies").getValue().toString())>= people){
+                                continue;
+                        }
+                    }
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
     }
 
-//    private int calcuate_days (String start, String end ){
-//        if (start.equals(end)){
-//            return 1;
-//        }
-//        if (start.substring(6).equals(end.substring(6)) && start.substring(2,4).equals(end.substring(2,4))){
-//            // same year and same month
-//            return (Integer.valueOf(end)-Integer.valueOf(start))/1000000;
-//        }
-//        if ()
-//        return 0;
-//    }
 }
