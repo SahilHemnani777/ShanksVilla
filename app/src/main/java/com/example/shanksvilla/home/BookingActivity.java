@@ -120,7 +120,18 @@ public class BookingActivity extends AppCompatActivity{
                         endDate= setDate(i2, (i1+1), i, endDate);
                         displayText.setText("Select no. of people");
                     }else{
-                        Toast.makeText(BookingActivity.this, "End date can't be before start date", Toast.LENGTH_SHORT).show();
+                        if (i1>y){
+                            dateTo.setText(i2 +"-"+ (i1+1) +"-"+ i);
+                            endDate= setDate(i2, (i1+1), i, endDate);
+                            displayText.setText("Select no. of people");
+                        }else {
+                            if(i>z){
+                                dateTo.setText(i2 +"-"+ (i1+1) +"-"+ i);
+                                endDate= setDate(i2, (i1+1), i, endDate);
+                                displayText.setText("Select no. of people");
+                            }else{
+                            Toast.makeText(BookingActivity.this, "End date can't be before start date", Toast.LENGTH_SHORT).show();}
+                        }
                     }
                 }
             }
