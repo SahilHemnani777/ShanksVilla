@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShanksVilla">
-        <activity android:name=".home.BookingActivity2"></activity>
-        <activity android:name=".home.BookingActivity" />
+        <activity android:name=".home.booking.DetailsActivity"></activity>
+        <activity android:name=".home.booking.BookingActivity2" />
+        <activity android:name=".home.booking.BookingActivity" />
         <activity android:name=".splash.SplashScreenActivity">
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

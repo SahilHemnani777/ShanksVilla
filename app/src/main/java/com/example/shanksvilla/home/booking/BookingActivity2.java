@@ -1,9 +1,8 @@
-package com.example.shanksvilla.home;
+package com.example.shanksvilla.home.booking;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,7 +22,6 @@ import java.util.Iterator;
 
 public class BookingActivity2 extends AppCompatActivity {
     private static final String TAG = "BookingActivity2";
-    private TextView date;
     private String startDate;
     private String endDate;
     private int people;
@@ -44,7 +42,6 @@ public class BookingActivity2 extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        date = findViewById(R.id.datestartend);
         startDate = String.format("%08d", reverse(bundle.getInt("startDate")));
         // start date and end date in String format--> ddMMyyyy
         endDate = String.format("%08d",reverse(bundle.getInt("endDate")));
@@ -81,6 +78,7 @@ public class BookingActivity2 extends AppCompatActivity {
                 }
                 if (dates.isEmpty()){
                     Toast.makeText(BookingActivity2.this, "Found", Toast.LENGTH_SHORT).show();
+
                 }else{
                     Toast.makeText(BookingActivity2.this, "Not Found", Toast.LENGTH_SHORT).show();
                 }
@@ -93,11 +91,7 @@ public class BookingActivity2 extends AppCompatActivity {
         });
 
 
-//        Log.d(TAG, "onCreate: "+ startDate +endDate +String.valueOf(people));
-//        Log.d(TAG, "onCreate: "+ reverse(bundle.getInt("startDate")));
-//        Log.d(TAG, "onCreate: "+ reverse(bundle.getInt("endDate")));
-//        Log.d(TAG, "onCreate: "+ bundle.getInt("count"));
-//        Log.d(TAG, "onCreate: "+ bundle.getInt("days"));
+
 
 
     }
@@ -114,27 +108,7 @@ public class BookingActivity2 extends AppCompatActivity {
 
     }
 
-//    private boolean search(DataSnapshot snapshot) {
-//        Iterator<DataSnapshot> items = snapshot.getChildren().iterator();
-//        //now we have all the entries in the items ka iterator
-////                Toast.makeText(BookingActivity2.this, "items" + snapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
-//
-//        while (items.hasNext()) {
-//            DataSnapshot date = items.next();
-//            if (date.getKey().toString().equals(startDate)) {
-//                if (Integer.valueOf(date.child("vacancies").getValue().toString())>=people && items.hasNext()){
-//                    while(!items.next().getKey().toString().equals(endDate)){
-//                        DataSnapshot x= items.next();
-//                        if (Integer.valueOf(x.child("vacancies").getValue().toString())>= people){
-//                                continue;
-//                        }
-//                    }
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
+
 
 
     private void extract_date(String startDate, String endDate){

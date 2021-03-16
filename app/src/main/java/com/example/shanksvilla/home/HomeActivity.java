@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.shanksvilla.R;
+import com.example.shanksvilla.home.booking.BookingActivity;
 import com.example.shanksvilla.home.fragments.DescriptionFragment;
 import com.example.shanksvilla.home.fragments.HomeFragment;
 import com.example.shanksvilla.home.fragments.ProfileFragment;

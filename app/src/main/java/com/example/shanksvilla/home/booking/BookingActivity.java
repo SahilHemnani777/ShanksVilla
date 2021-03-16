@@ -1,4 +1,4 @@
-package com.example.shanksvilla.home;
+package com.example.shanksvilla.home.booking;
 
 import android.content.Intent;
 import android.os.Bundle;
