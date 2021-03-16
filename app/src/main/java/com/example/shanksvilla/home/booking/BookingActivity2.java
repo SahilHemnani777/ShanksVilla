@@ -3,6 +3,11 @@ package com.example.shanksvilla.home.booking;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,6 +31,10 @@ public class BookingActivity2 extends AppCompatActivity {
     private String endDate;
     private int people;
     private int days;
+    private ImageView shanksVilla;
+    private TextView error_msg;
+    private Button btn_back;
+    private FrameLayout fl;
 
     private ArrayList<Integer> extracted_dates = new ArrayList<>();
 
@@ -39,6 +48,20 @@ public class BookingActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking2);
 
+        shanksVilla= findViewById(R.id.shanks_error);
+        error_msg= findViewById(R.id.error_text);
+        btn_back= findViewById(R.id.btn_go_back);
+        fl= findViewById(R.id.frame_not_found);
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BookingActivity2.this, BookingActivity.class));
+                finish();
+            }
+        });
+
+
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -49,6 +72,7 @@ public class BookingActivity2 extends AppCompatActivity {
         days= bundle.getInt("days");
         Log.d(TAG, "onCreate: "+ startDate+"------------" +endDate );
         extract_date(startDate,endDate);
+        ArrayList<Integer> list_to_send = extracted_dates;
 //        Log.d(TAG, "onCreate: unsorted" + extracted_dates);
         Collections.sort(extracted_dates);
 //        Log.d(TAG, "onCreate: "+ extracted_dates);
@@ -66,7 +90,7 @@ public class BookingActivity2 extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Iterator<DataSnapshot> items = snapshot.getChildren().iterator();
-                String keyDate= dates.get(0);
+//                String keyDate= dates.get(0);
                 while (items.hasNext()){
                     DataSnapshot date = items.next();
                     for (int i =0; i<dates.size();i++){
@@ -77,7 +101,17 @@ public class BookingActivity2 extends AppCompatActivity {
                     }
                 }
                 if (dates.isEmpty()){
-                    Toast.makeText(BookingActivity2.this, "Found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BookingActivity2.this, "Found", Toast.LENGTH_LONG).show();
+                    btn_back.setVisibility(View.GONE);
+                    shanksVilla.setVisibility(View.GONE);
+                    error_msg.setVisibility(View.GONE);
+                    fl.setVisibility(View.GONE);
+                    Intent intent = new Intent(BookingActivity2.this, DetailsActivity.class);
+                    intent.putExtra("list", list_to_send);
+                    intent.putExtra("number", people);
+//                    Log.d(TAG, "onDataChange: "+ list_to_send + "bhej raha hu");
+                    startActivity(intent);
+                    finish();
 
                 }else{
                     Toast.makeText(BookingActivity2.this, "Not Found", Toast.LENGTH_SHORT).show();
