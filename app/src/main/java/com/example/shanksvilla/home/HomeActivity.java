@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
 //        Function for the database setup(don't use afterwards...)
-//        database_init();
+        database_init();
 
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);

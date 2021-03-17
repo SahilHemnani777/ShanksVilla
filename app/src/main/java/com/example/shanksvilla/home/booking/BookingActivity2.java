@@ -106,7 +106,7 @@ public class BookingActivity2 extends AppCompatActivity {
                     shanksVilla.setVisibility(View.GONE);
                     error_msg.setVisibility(View.GONE);
                     fl.setVisibility(View.GONE);
-                    Intent intent = new Intent(BookingActivity2.this, DetailsActivity.class);
+                    Intent intent = new Intent(BookingActivity2.this, LocationSelector.class);
                     intent.putExtra("list", list_to_send);
                     intent.putExtra("number", people);
 //                    Log.d(TAG, "onDataChange: "+ list_to_send + "bhej raha hu");

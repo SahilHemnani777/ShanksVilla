@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShanksVilla">
-        <activity android:name=".home.booking.DetailsActivity"></activity>
+        <activity android:name=".home.booking.LocationSelector"></activity>
+        <activity android:name=".home.booking.DetailsActivity" />
         <activity android:name=".home.booking.BookingActivity2" />
         <activity android:name=".home.booking.BookingActivity" />
         <activity android:name=".splash.SplashScreenActivity">

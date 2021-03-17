@@ -50,6 +50,9 @@ dependencies {
     //Dependencies for Image courseal
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //card view
+    implementation "androidx.cardview:cardview:1.0.0"
+
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
 
 
