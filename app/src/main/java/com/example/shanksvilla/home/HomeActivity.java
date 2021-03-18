@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
 //        Function for the database setup(don't use afterwards...)
-        database_init();
+//        database_init();
 
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -523,7 +523,12 @@ public class HomeActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: "+ cal);
 
         for(int i =0; i<cal.size(); i++){
-            myRef.child("database").child(cal.get(i)).child("vacancies").setValue(20);
+            myRef.child("database1").child(cal.get(i)).child("vacancies").setValue(20);
+//            myRef.child("database").child(cal.get(i)).child("allotted").setValue(i);
+
+        }
+        for(int i =0; i<cal.size(); i++){
+            myRef.child("database2").child(cal.get(i)).child("vacancies").setValue(20);
 //            myRef.child("database").child(cal.get(i)).child("allotted").setValue(i);
 
         }

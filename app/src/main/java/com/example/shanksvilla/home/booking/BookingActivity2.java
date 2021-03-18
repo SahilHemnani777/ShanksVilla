@@ -26,6 +26,8 @@ import java.util.Iterator;
 
 
 public class BookingActivity2 extends AppCompatActivity {
+    Intent intent_to_start ;
+
     private static final String TAG = "BookingActivity2";
     private String startDate;
     private String endDate;
@@ -47,6 +49,10 @@ public class BookingActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking2);
+        Log.d(TAG, "onCreate: "+ myRef.child("database1").get().toString());
+
+
+        intent_to_start =new Intent(BookingActivity2.this, LocationSelector.class);
 
         shanksVilla= findViewById(R.id.shanks_error);
         error_msg= findViewById(R.id.error_text);
@@ -72,23 +78,40 @@ public class BookingActivity2 extends AppCompatActivity {
         days= bundle.getInt("days");
         Log.d(TAG, "onCreate: "+ startDate+"------------" +endDate );
         extract_date(startDate,endDate);
-        ArrayList<Integer> list_to_send = extracted_dates;
 //        Log.d(TAG, "onCreate: unsorted" + extracted_dates);
         Collections.sort(extracted_dates);
-//        Log.d(TAG, "onCreate: "+ extracted_dates);
-        // so we have sorted arry of dates
-        //noe purify the string array to a new array
+        Log.d(TAG, "onCreate: "+ extracted_dates);
+        // so we have sorted array of dates
+        //now purify the string array to a new array
+
+//        Log.d(TAG, "onCreate: purified"+ dates);
+        searchInDatabase("database1");
+        searchInDatabase("database2");
+
+        startActivity(intent_to_start);
+
+
+
+
+
+
+
+
+
+    }
+    private void searchInDatabase(String name_of_database){
+//        Log.d(TAG, "searchInDatabase: aarasararar");
+        ArrayList<Integer> list_to_send = extracted_dates;
+//        Log.d(TAG, "searchInDatabase: "+ list_to_send);
         ArrayList<String> dates = new ArrayList<>();
         for (int i = 0; i<extracted_dates.size();i++){
             dates.add(String.format("%08d", extracted_dates.get(i)));
         }
-        Log.d(TAG, "onCreate: purified"+ dates);
-
-
-
-        myRef.child("database").addValueEventListener(new ValueEventListener() {
+//        Log.d(TAG, "searchInDatabase: "+dates);
+        myRef.child(name_of_database).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d(TAG, "onDataChange: in data base" + name_of_database);
                 Iterator<DataSnapshot> items = snapshot.getChildren().iterator();
 //                String keyDate= dates.get(0);
                 while (items.hasNext()){
@@ -100,34 +123,27 @@ public class BookingActivity2 extends AppCompatActivity {
                         }
                     }
                 }
+                Log.d(TAG, "onDataChange: "+ dates);
                 if (dates.isEmpty()){
-                    Toast.makeText(BookingActivity2.this, "Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(BookingActivity2.this, "Found in "+ name_of_database, Toast.LENGTH_LONG).show();
                     btn_back.setVisibility(View.GONE);
                     shanksVilla.setVisibility(View.GONE);
                     error_msg.setVisibility(View.GONE);
                     fl.setVisibility(View.GONE);
-                    Intent intent = new Intent(BookingActivity2.this, LocationSelector.class);
-                    intent.putExtra("list", list_to_send);
-                    intent.putExtra("number", people);
-//                    Log.d(TAG, "onDataChange: "+ list_to_send + "bhej raha hu");
-                    startActivity(intent);
-                    finish();
-
+                    intent_to_start.putExtra("list", list_to_send);
+                    intent_to_start.putExtra("number", people);
+                    intent_to_start.putExtra(name_of_database, "found");
+                    Log.d(TAG, "onDataChange: if me aa gaya");
                 }else{
-                    Toast.makeText(BookingActivity2.this, "Not Found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BookingActivity2.this, "Not Found in " +name_of_database, Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG, "onCancelled: "+ error.getMessage());
             }
         });
-
-
-
-
-
     }
 
     private int reverse(int date) {  //20210318
