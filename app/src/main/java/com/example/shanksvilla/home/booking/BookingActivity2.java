@@ -2,6 +2,7 @@ package com.example.shanksvilla.home.booking;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,8 +27,7 @@ import java.util.Iterator;
 
 
 public class BookingActivity2 extends AppCompatActivity {
-    Intent intent_to_start ;
-
+    Intent intent_to_start;
     private static final String TAG = "BookingActivity2";
     private String startDate;
     private String endDate;
@@ -88,19 +88,18 @@ public class BookingActivity2 extends AppCompatActivity {
         searchInDatabase("database1");
         searchInDatabase("database2");
 
-        startActivity(intent_to_start);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent_to_start);
+            }
+        }, 5000);
 
-
-
-
-
-
-
-
+//        startActivity(intent_to_start);
 
     }
     private void searchInDatabase(String name_of_database){
-//        Log.d(TAG, "searchInDatabase: aarasararar");
+        Log.d(TAG, "searchInDatabase: "+ name_of_database);
         ArrayList<Integer> list_to_send = extracted_dates;
 //        Log.d(TAG, "searchInDatabase: "+ list_to_send);
         ArrayList<String> dates = new ArrayList<>();
@@ -130,11 +129,12 @@ public class BookingActivity2 extends AppCompatActivity {
                     shanksVilla.setVisibility(View.GONE);
                     error_msg.setVisibility(View.GONE);
                     fl.setVisibility(View.GONE);
-                    intent_to_start.putExtra("list", list_to_send);
-                    intent_to_start.putExtra("number", people);
+//                    intent_to_start.putExtra("list", list_to_send);
+//                    intent_to_start.putExtra("number", people);
                     intent_to_start.putExtra(name_of_database, "found");
                     Log.d(TAG, "onDataChange: if me aa gaya");
                 }else{
+                    intent_to_start.putExtra(name_of_database, "Notfound");
                     Toast.makeText(BookingActivity2.this, "Not Found in " +name_of_database, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -145,7 +145,6 @@ public class BookingActivity2 extends AppCompatActivity {
             }
         });
     }
-
     private int reverse(int date) {  //20210318
 
         String x = String.valueOf(date);
