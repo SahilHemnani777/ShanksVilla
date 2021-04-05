@@ -132,6 +132,8 @@ public class BookingActivity2 extends AppCompatActivity {
 //                    intent_to_start.putExtra("list", list_to_send);
 //                    intent_to_start.putExtra("number", people);
                     intent_to_start.putExtra(name_of_database, "found");
+                    intent_to_start.putExtra("dates", extracted_dates);
+                    intent_to_start.putExtra("people", people);
                     Log.d(TAG, "onDataChange: if me aa gaya");
                 }else{
                     intent_to_start.putExtra(name_of_database, "Notfound");
@@ -156,9 +158,6 @@ public class BookingActivity2 extends AppCompatActivity {
         return Integer.valueOf(newDate);
 
     }
-
-
-
 
     private void extract_date(String startDate, String endDate){
 

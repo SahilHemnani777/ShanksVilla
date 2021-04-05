@@ -35,6 +35,8 @@ public class LocationSelector extends AppCompatActivity {
         }
         isAvailable.add(bundle.getString("database1").equals("found"));
         isAvailable.add(bundle.getString("database2").equals("found"));
+        Log.d(TAG, "onCreate: peoples= " + bundle.getInt("people"));
+        Log.d(TAG, "onCreate: dates=" + bundle.get("dates").toString());
 
         cardView= findViewById(R.id.recyclerCardView);
         cardView.setLayoutManager(new LinearLayoutManager(this));
