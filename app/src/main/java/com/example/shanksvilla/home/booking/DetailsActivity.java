@@ -3,7 +3,6 @@ package com.example.shanksvilla.home.booking;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -39,13 +38,11 @@ public class DetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        Integer number = bundle.getInt("number");
-        ArrayList<Integer> list = (ArrayList<Integer>) bundle.get("list");
+        Integer number = bundle.getInt("people");
+        ArrayList<Integer> list = (ArrayList<Integer>) bundle.get("dates");
         Log.d(TAG, "onCreate: "+ list+ "aa gayi");
-
-        btnDone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (bundle.getString("location").equals("kihim")){
+            btnDone.setOnClickListener(v -> {
                 assert currentUser != null;
                 String UID = currentUser.getUid();
                 String mName= name.getText().toString();
@@ -54,13 +51,30 @@ public class DetailsActivity extends AppCompatActivity {
                 dbRef user = new dbRef(mName, Integer.parseInt(mAge), 0, mPhone, UID);
                 for (int i = 0; i<list.size(); i++){
                     Log.d(TAG, "onClick: "+String.valueOf(list.get(i)));
-                    myRef.child("database").child(String.valueOf(list.get(i))).child("bookings").setValue(user);
-                    myRef.child("database").child(String.valueOf(list.get(i))).child("bookings").child("no_of_members").setValue(number);
+                    myRef.child("database1").child(String.valueOf(list.get(i))).child("bookings").setValue(user);
+                    myRef.child("database1").child(String.valueOf(list.get(i))).child("bookings").child("no_of_members").setValue(number);
 //                    myRef.child("database").child("vacancies")
                 }
 
-            }
-        });
+            });
+        }else{
+            btnDone.setOnClickListener(v -> {
+                assert currentUser != null;
+                String UID = currentUser.getUid();
+                String mName= name.getText().toString();
+                String mAge= age.getText().toString();
+                String mPhone= phone.getText().toString();
+                dbRef user = new dbRef(mName, Integer.parseInt(mAge), 0, mPhone, UID);
+                for (int i = 0; i<list.size(); i++){
+                    Log.d(TAG, "onClick: "+String.valueOf(list.get(i)));
+                    myRef.child("database2").child(String.valueOf(list.get(i))).child("bookings").setValue(user);
+                    myRef.child("database2").child(String.valueOf(list.get(i))).child("bookings").child("no_of_members").setValue(number);
+//                    myRef.child("database").child("vacancies")
+                }
+
+            });
+        }
+
 
 
     }

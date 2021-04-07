@@ -124,7 +124,8 @@ public class BookingActivity2 extends AppCompatActivity {
                 }
                 Log.d(TAG, "onDataChange: "+ dates);
                 if (dates.isEmpty()){
-                    Toast.makeText(BookingActivity2.this, "Found in "+ name_of_database, Toast.LENGTH_LONG).show();
+                    Toast.makeText(BookingActivity2.this, "Found in "
+                            + name_of_database, Toast.LENGTH_LONG).show();
                     btn_back.setVisibility(View.GONE);
                     shanksVilla.setVisibility(View.GONE);
                     error_msg.setVisibility(View.GONE);
@@ -137,7 +138,8 @@ public class BookingActivity2 extends AppCompatActivity {
                     Log.d(TAG, "onDataChange: if me aa gaya");
                 }else{
                     intent_to_start.putExtra(name_of_database, "Notfound");
-                    Toast.makeText(BookingActivity2.this, "Not Found in " +name_of_database, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BookingActivity2.this, "Not Found in "
+                            +name_of_database, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -244,15 +246,4 @@ public class BookingActivity2 extends AppCompatActivity {
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 }
