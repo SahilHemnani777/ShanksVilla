@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,17 +51,21 @@ public class DetailsActivity extends AppCompatActivity {
             String mAge = age.getText().toString();
             String mPhone = phone.getText().toString();
             dbRef user = new dbRef(mName, Integer.parseInt(mAge), 0, mPhone, UID);
+
             if (bundle.getString("location").equals("kihim")) {
+
                 for (int i = 0; i < list.size(); i++) {
                     Log.d(TAG, "onClick: " + list.get(i));
                     myRef.child("database1").child(String.format("%08d",list.get(i))).child("bookings").setValue(user);
                     myRef.child("database1").child(String.format("%08d",list.get(i))).child("bookings").child("no_of_members").setValue(number);
+                    Toast.makeText(this, "You'll get notified when your booking is confirmed", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 for (int i = 0; i < list.size(); i++) {
                     Log.d(TAG, "onClick: " + list.get(i));
                     myRef.child("database2").child(String.format("%08d",list.get(i))).child("bookings").setValue(user);
                     myRef.child("database2").child(String.format("%08d",list.get(i))).child("bookings").child("no_of_members").setValue(number);
+                    Toast.makeText(this, "You'll get notified when your booking is confirmed", Toast.LENGTH_SHORT).show();
                 }
 
 
