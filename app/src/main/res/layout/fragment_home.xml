@@ -1,14 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home.fragments.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home Fragment" />
+        android:background="#E4CBCB">
 
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="701dp"
+            android:layout_height="205dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/mountain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.695"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="202dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="Shanks Villa"
+            android:textColor="@color/black"
+            android:textSize="28dp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/viewDetailsButton"
+            android:layout_width="138dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="4dp"
+            android:text="View Details"
+            android:textColor="#0B0505"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView15"
+            app:layout_constraintHorizontal_bias="0.183"
+            app:layout_constraintStart_toStartOf="@+id/textView15"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        <Button
+            android:id="@+id/locationbtn"
+            android:layout_width="124dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="76dp"
+            android:text="Location Where next?"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/datesbtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/datesbtn"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/datesbtn"
+            android:layout_width="127dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="152dp"
+            android:text="Dates select dates"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.023"
+            app:layout_constraintStart_toEndOf="@+id/locationbtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.example.shanksvilla.Map1"
+            android:layout_width="360dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/datesbtn" />
+
+        <fragment
+            android:id="@+id/fragment2"
+            android:name="com.example.shanksvilla.Map1"
+            android:layout_width="360dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/fragment"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/fragment"
+            app:layout_constraintTop_toBottomOf="@+id/fragment" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
