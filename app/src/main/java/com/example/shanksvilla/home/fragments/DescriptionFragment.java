@@ -42,7 +42,7 @@ public class DescriptionFragment extends Fragment {
         View v=  inflater.inflate(R.layout.fragment_description, container, false);
         tvName= v.findViewById(R.id.greetUserTextView);
 
-//        tvName.setText("Hello "+currentUser.getDisplayName());
+        tvName.setText("Hello "+currentUser.getDisplayName());
 
         viewPager = v.findViewById(R.id.ViewPagerforKBN);
         pagerAdapter = new ScreenSlidePagerAdapter(this);

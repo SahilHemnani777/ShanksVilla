@@ -32,8 +32,15 @@ public class HomeFragment extends Fragment {
 
         locationButton.setOnClickListener(v12 -> new AlertDialog.Builder(getActivity())
                 .setTitle("Locations")
-                .setMessage("1. Kihim Beach\n2.Pune")
+                .setMessage("1. Kihim Beach\n2. Pune")
                 .setCancelable(true).show());
+
+        viewDetailsButton.setOnClickListener(v1 -> {
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("ShanksVilla")
+                    .setMessage("-----TAGLINE-----")
+                    .setCancelable(true).show();
+        });
 
         return v;
     }
