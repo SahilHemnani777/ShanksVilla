@@ -100,5 +100,23 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/fragment"
             app:layout_constraintTop_toBottomOf="@+id/fragment" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kihim Beach"
+            app:layout_constraintEnd_toEndOf="@+id/fragment"
+            app:layout_constraintStart_toStartOf="@+id/fragment"
+            app:layout_constraintTop_toTopOf="@+id/fragment" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pune"
+            app:layout_constraintEnd_toEndOf="@+id/fragment2"
+            app:layout_constraintStart_toStartOf="@+id/fragment2"
+            app:layout_constraintTop_toTopOf="@+id/fragment2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

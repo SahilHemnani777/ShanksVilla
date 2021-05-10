@@ -107,7 +107,6 @@ public class HomeActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: finished");
     }
 
-
     public void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, task -> {

@@ -122,42 +122,12 @@
         android:layout_width="55dp"
         android:layout_height="32dp"
         android:layout_marginStart="264dp"
-        android:foreground="@color/cardview_dark_background"
+        android:foreground="@color/common_google_signin_btn_text_dark_disabled"
+        android:minWidth="50dp"
+        android:spinnerMode="dialog"
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView7"
         app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="No. of days"
-        android:textSize="18sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/dateto" />
-
-    <TextView
-        android:id="@+id/days"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:hint="1-30"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/dateto" />
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="55dp"
-        android:layout_height="32dp"
-
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:foreground="@color/cardview_dark_background"
-        app:layout_constraintStart_toEndOf="@+id/days"
-        app:layout_constraintTop_toBottomOf="@+id/dateto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
