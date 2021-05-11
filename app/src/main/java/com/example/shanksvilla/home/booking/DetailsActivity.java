@@ -3,10 +3,11 @@ package com.example.shanksvilla.home.booking;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shanksvilla.R;
@@ -52,26 +53,45 @@ public class DetailsActivity extends AppCompatActivity {
             String mPhone = phone.getText().toString();
             dbRef user = new dbRef(mName, Integer.parseInt(mAge), 0, mPhone, UID);
 
-            if (bundle.getString("location").equals("kihim")) {
+            AlertDialog.Builder mBuilder = new AlertDialog.Builder(DetailsActivity.this);
+            View view= getLayoutInflater().inflate(R.layout.alert_dialogue_details, null);
 
-                for (int i = 0; i < list.size(); i++) {
-                    Log.d(TAG, "onClick: " + list.get(i));
-                    myRef.child("database1").child(String.format("%08d",list.get(i))).child("bookings").setValue(user);
-                    myRef.child("database1").child(String.format("%08d",list.get(i))).child("bookings").child("no_of_members").setValue(number);
-                    Toast.makeText(this, "You'll get notified when your booking is confirmed", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                for (int i = 0; i < list.size(); i++) {
-                    Log.d(TAG, "onClick: " + list.get(i));
-                    myRef.child("database2").child(String.format("%08d",list.get(i))).child("bookings").setValue(user);
-                    myRef.child("database2").child(String.format("%08d",list.get(i))).child("bookings").child("no_of_members").setValue(number);
-                    Toast.makeText(this, "You'll get notified when your booking is confirmed", Toast.LENGTH_SHORT).show();
-                }
+            //now here goes the logic of adding the list view items and extracting the details
 
 
-            }
         });
 
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//            if (bundle.getString("location").equals("kihim")) {
+//
+//                for (int i = 0; i < list.size(); i++) {
+//                    Log.d(TAG, "onClick: " + list.get(i));
+//                    myRef.child("database1").child(String.format("%08d",list.get(i))).child("bookings").setValue(user);
+//                    myRef.child("database1").child(String.format("%08d",list.get(i))).child("bookings").child("no_of_members").setValue(number);
+//                    Toast.makeText(this, "You'll get notified when your booking is confirmed", Toast.LENGTH_SHORT).show();
+//                }
+//            } else {
+//                for (int i = 0; i < list.size(); i++) {
+//                    Log.d(TAG, "onClick: " + list.get(i));
+//                    myRef.child("database2").child(String.format("%08d",list.get(i))).child("bookings").setValue(user);
+//                    myRef.child("database2").child(String.format("%08d",list.get(i))).child("bookings").child("no_of_members").setValue(number);
+//                    Toast.makeText(this, "You'll get notified when your booking is confirmed", Toast.LENGTH_SHORT).show();
+//                }
+//
+//
+//            }

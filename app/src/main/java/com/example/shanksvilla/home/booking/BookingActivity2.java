@@ -49,8 +49,6 @@ public class BookingActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking2);
-        Log.d(TAG, "onCreate: "+ myRef.child("database1").get().toString());
-
 
         intent_to_start =new Intent(BookingActivity2.this, LocationSelector.class);
 
@@ -59,12 +57,9 @@ public class BookingActivity2 extends AppCompatActivity {
         btn_back= findViewById(R.id.btn_go_back);
         fl= findViewById(R.id.frame_not_found);
 
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(BookingActivity2.this, BookingActivity.class));
-                finish();
-            }
+        btn_back.setOnClickListener(v -> {
+            startActivity(new Intent(BookingActivity2.this, BookingActivity.class));
+            finish();
         });
 
 
@@ -75,44 +70,31 @@ public class BookingActivity2 extends AppCompatActivity {
         // start date and end date in String format--> ddMMyyyy
         endDate = String.format("%08d",reverse(bundle.getInt("endDate")));
         people = bundle.getInt("count");
-        days= bundle.getInt("days");
+//        days= bundle.getInt("days");
         Log.d(TAG, "onCreate: "+ startDate+"------------" +endDate );
         extract_date(startDate,endDate);
-//        Log.d(TAG, "onCreate: unsorted" + extracted_dates);
         Collections.sort(extracted_dates);
         Log.d(TAG, "onCreate: "+ extracted_dates);
-        // so we have sorted array of dates
-        //now purify the string array to a new array
 
-//        Log.d(TAG, "onCreate: purified"+ dates);
         searchInDatabase("database1");
         searchInDatabase("database2");
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(intent_to_start);
-            }
-        }, 5000);
+        new Handler().postDelayed(() -> startActivity(intent_to_start), 5000);
 
-//        startActivity(intent_to_start);
 
     }
     private void searchInDatabase(String name_of_database){
         Log.d(TAG, "searchInDatabase: "+ name_of_database);
         ArrayList<Integer> list_to_send = extracted_dates;
-//        Log.d(TAG, "searchInDatabase: "+ list_to_send);
         ArrayList<String> dates = new ArrayList<>();
         for (int i = 0; i<extracted_dates.size();i++){
             dates.add(String.format("%08d", extracted_dates.get(i)));
         }
-//        Log.d(TAG, "searchInDatabase: "+dates);
         myRef.child(name_of_database).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "onDataChange: in data base" + name_of_database);
                 Iterator<DataSnapshot> items = snapshot.getChildren().iterator();
-//                String keyDate= dates.get(0);
                 while (items.hasNext()){
                     DataSnapshot date = items.next();
                     for (int i =0; i<dates.size();i++){
@@ -130,8 +112,6 @@ public class BookingActivity2 extends AppCompatActivity {
                     shanksVilla.setVisibility(View.GONE);
                     error_msg.setVisibility(View.GONE);
                     fl.setVisibility(View.GONE);
-//                    intent_to_start.putExtra("list", list_to_send);
-//                    intent_to_start.putExtra("number", people);
                     intent_to_start.putExtra(name_of_database, "found");
                     intent_to_start.putExtra("dates", extracted_dates);
                     intent_to_start.putExtra("people", people);

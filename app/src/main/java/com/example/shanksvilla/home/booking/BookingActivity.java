@@ -152,7 +152,7 @@ public class BookingActivity extends AppCompatActivity {
             intent.putExtra("startDate", startDate);
             intent.putExtra("endDate", endDate);
             intent.putExtra("count", Integer.valueOf(peoples.getText().toString()));
-            intent.putExtra("days", Integer.valueOf(days.getText().toString()));
+//            intent.putExtra("days", Integer.valueOf(days.getText().toString()));
             startActivity(intent);
             finish();
         });
