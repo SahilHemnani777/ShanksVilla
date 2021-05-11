@@ -46,8 +46,9 @@
     </FrameLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="436dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="390dp"
+        android:layout_height="459dp"
         android:layout_marginTop="44dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,11 +95,26 @@
             android:ems="10"
             android:inputType="phone" />
 
+        <TextView
+            android:id="@+id/textView445"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Details of other persons" />
+
+        <EditText
+            android:id="@+id/peoples_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="name_of_person - age\nname_of_person - age"
+            android:inputType="textMultiLine" />
+
         <Button
             android:id="@+id/done_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Done" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

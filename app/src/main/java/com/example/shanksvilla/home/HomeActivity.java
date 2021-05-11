@@ -95,11 +95,12 @@ public class HomeActivity extends AppCompatActivity {
                     break;
 
                 case R.id.itemBook:
-
-//                        loading the BookingActivity because it'll be the main Activity
-                    startActivity(new Intent(HomeActivity.this, BookingActivity.class));
-//                        BookingFragment bookingFragment = new BookingFragment();
-//                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,bookingFragment,null).commit();
+                    if (mAuth.getCurrentUser()!=null){
+                        startActivity(new Intent(HomeActivity.this, BookingActivity.class));
+                        break;
+                    }else{
+                        snackBar.show();
+                    }
                     break;
             }
             return true;
