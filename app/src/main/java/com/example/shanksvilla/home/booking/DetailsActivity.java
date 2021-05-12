@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -52,29 +54,59 @@ public class DetailsActivity extends AppCompatActivity {
             String mAge = age.getText().toString();
             String mPhone = phone.getText().toString();
             String mpeoplesDetails = peoplesDetails.getText().toString();
-            dbRef user = new dbRef(mName, Integer.parseInt(mAge), 0, mPhone, UID);
 
-            //now here goes the logic of adding the list view items and extracting the details
+            if (!UID.equals("") && !mName.equals("") && !mAge.equals("") && !mPhone.equals("") && !mpeoplesDetails.equals("")) {
+                dbRef user = new dbRef(mName, Integer.parseInt(mAge), 0, mPhone, UID);
 
 
+                if (bundle.getString("location").equals("kihim")) {
 
-            if (bundle.getString("location").equals("kihim")) {
+                    for (int i = 0; i < list.size(); i++) {
+                        AtomicReference<Integer> old = new AtomicReference<>(999);
+                        Log.d(TAG, "onClick: " + list.get(i));
+                        int finalI = i;
+                        myRef.child("database1").child(String.format("%08d", list.get(i))).child("vacancies").get().addOnCompleteListener(task -> {
+                            //finding no. of vacancies
+                            old.set(Integer.valueOf(task.getResult().getValue().toString()));
+                            myRef.child("database1").child(String.format("%08d", list.get(finalI))).get().addOnCompleteListener(task1 -> {
+                                HashMap<String, String> map = (HashMap<String, String>) task1.getResult().getValue();
+                                //finding no. of booking
+                                Integer no_of_bookings = map.size();
+                                myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).setValue(user);
+                                myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).child("no_of_members").setValue(number);
+                                myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).child("details").setValue(mpeoplesDetails);
+                                myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("vacancies").setValue(old.get() - number);
+                                Toast.makeText(this, "Booking Confirmed", Toast.LENGTH_SHORT).show();
+                            });
 
-                for (int i = 0; i < list.size(); i++) {
-                    Log.d(TAG, "onClick: " + list.get(i));
-                    myRef.child("database2").child(String.format("%08d",list.get(i))).child("bookings").setValue(user);
-                    myRef.child("database2").child(String.format("%08d",list.get(i))).child("bookings").child("no_of_members").setValue(number);
-                    Toast.makeText(this, "You'll get notified when your booking is confirmed", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+
+
+                } else {
+                    for (int i = 0; i < list.size(); i++) {
+                        AtomicReference<Integer> old = new AtomicReference<>(999);
+                        Log.d(TAG, "onClick: " + list.get(i));
+                        int finalI = i;
+                        myRef.child("database2").child(String.format("%08d", list.get(i))).child("vacancies").get().addOnCompleteListener(task -> {
+                            //finding no. of vacancies
+                            old.set(Integer.valueOf(task.getResult().getValue().toString()));
+                            myRef.child("database2").child(String.format("%08d", list.get(finalI))).get().addOnCompleteListener(task1 -> {
+                                HashMap<String, String> map = (HashMap<String, String>) task1.getResult().getValue();
+                                //finding no. of booking
+                                Integer no_of_bookings = map.size();
+                                myRef.child("database2").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).setValue(user);
+                                myRef.child("database2").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).child("no_of_members").setValue(number);
+                                myRef.child("database2").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).child("details").setValue(mpeoplesDetails);
+                                myRef.child("database2").child(String.format("%08d", list.get(finalI))).child("vacancies").setValue(old.get() - number);
+                                Toast.makeText(this, "Booking Confirmed", Toast.LENGTH_SHORT).show();
+                            });
+
+                        });
+                    }
                 }
             } else {
-                for (int i = 0; i < list.size(); i++) {
-                    Log.d(TAG, "onClick: " + list.get(i));
-                    myRef.child("database2").child(String.format("%08d",list.get(i))).child("bookings").setValue(user);
-                    myRef.child("database2").child(String.format("%08d",list.get(i))).child("bookings").child("no_of_members").setValue(number);
-                    Toast.makeText(this, "You'll get notified when your booking is confirmed", Toast.LENGTH_SHORT).show();
-                }
-
-
+                Toast.makeText(this, "Please enter all the details..", Toast.LENGTH_SHORT).show();
             }
         });
 
