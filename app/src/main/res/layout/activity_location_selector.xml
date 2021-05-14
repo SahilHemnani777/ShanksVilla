@@ -95,6 +95,7 @@
         android:layout_marginBottom="44dp"
         android:text="Search"
         android:textSize="8sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"

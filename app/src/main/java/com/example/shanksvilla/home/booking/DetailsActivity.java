@@ -10,11 +10,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shanksvilla.R;
+import com.example.shanksvilla.model.booking;
 import com.example.shanksvilla.model.dbRef;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +30,13 @@ public class DetailsActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     private static final String TAG = "DetailsActivity";
+
+
+    /*
+    Firestore works here
+     */
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +55,9 @@ public class DetailsActivity extends AppCompatActivity {
         Integer number = bundle.getInt("people");
         ArrayList<Integer> list = (ArrayList<Integer>) bundle.get("dates");
         Log.d(TAG, "onCreate: " + list + "aa gayi");
+        Integer startDate = list.get(0);
+        Integer endDate = list.get(list.size()-1);
+
 
         btnDone.setOnClickListener(v -> {
             assert currentUser != null;
@@ -76,6 +88,14 @@ public class DetailsActivity extends AppCompatActivity {
                                 myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).child("no_of_members").setValue(number);
                                 myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).child("details").setValue(mpeoplesDetails);
                                 myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("vacancies").setValue(old.get() - number);
+
+                                //saving the bookings globally for admins with some booking ID (serialWise)
+                                booking booking = new booking(mName+mPhone+currentUser.getUid(), startDate.toString(), endDate.toString(), currentUser.getUid(),
+                                        mName, mAge, mPhone, currentUser.getEmail(), 0, mpeoplesDetails);
+                                firebaseFirestore.collection("bookings-kihim").document(mName+"|"+mPhone+"|"+currentUser.getUid()).set(booking);
+
+                                firebaseFirestore.collection("users").document(currentUser.getUid()).collection("bookings").document(mName+"|"+mPhone+"|"+currentUser.getUid()).set(booking);
+
                                 Toast.makeText(this, "Booking Confirmed", Toast.LENGTH_SHORT).show();
                             });
 
