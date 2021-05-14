@@ -8,8 +8,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCardView"
-        android:layout_width="411dp"
-        android:layout_height="408dp"
+        android:layout_width="412dp"
+        android:layout_height="446dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -57,4 +57,46 @@
         app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toEndOf="@+id/buttonK"
         app:layout_constraintTop_toBottomOf="@+id/recyclerCardView" />
+
+    <FrameLayout
+        android:id="@+id/frame_not_found"
+        android:layout_width="320dp"
+        android:layout_height="99dp"
+        android:background="#FFCCCC"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.863">
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/error_text"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Sorry the bookings are not available for the day, please select some other date! click the search button to check for other dates."
+
+        android:textColor="#FF0000"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/frame_not_found"
+        app:layout_constraintEnd_toEndOf="@+id/frame_not_found"
+        app:layout_constraintStart_toStartOf="@+id/frame_not_found"
+        app:layout_constraintTop_toTopOf="@+id/frame_not_found" />
+
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="76dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="44dp"
+        android:text="Search"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

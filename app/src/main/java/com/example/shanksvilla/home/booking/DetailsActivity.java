@@ -81,8 +81,6 @@ public class DetailsActivity extends AppCompatActivity {
 
                         });
                     }
-
-
                 } else {
                     for (int i = 0; i < list.size(); i++) {
                         AtomicReference<Integer> old = new AtomicReference<>(999);
@@ -114,17 +112,6 @@ public class DetailsActivity extends AppCompatActivity {
     }
 }
 
-//
-//   Log.d(TAG, "onClick: " + list.get(i));
-//           myRef.child("database1").child(String.format("%08d",list.get(i))).child("bookings").setValue(user);
-//           myRef.child("database1").child(String.format("%08d",list.get(i))).child("bookings").child("no_of_members").setValue(number);
-//           myRef.child("database1").child(String.format("%08d",list.get(i))).child("bookings").child("details").setValue(mpeoplesDetails);
-//           AtomicReference<Integer> old = new AtomicReference<>(20);
-//        myRef.child("database1").child(String.format("%08d",list.get(i))).child("vacancies").get().addOnCompleteListener(task -> {
-//        old.set(Integer.valueOf(task.getResult().getValue().toString()));
-//        });
-//        myRef.child("database1").child(String.format("%08d",list.get(i))).child("vacancies").setValue(old.get() - number);
-//        Toast.makeText(this, "You'll get notified when your booking is confirmed", Toast.LENGTH_SHORT).show();
 
 
 

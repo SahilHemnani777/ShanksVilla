@@ -26,7 +26,6 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -48,7 +47,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
 
     private TextView createNewAccount;
 
@@ -183,14 +181,12 @@ public class GoogleSignInActivity extends AppCompatActivity {
             String id= FirebaseAuth.getInstance().getCurrentUser().getUid();
             //using the model class to assign the values
             User user = new User(personName,personPhoto.toString(),id,personEmail);
-            //setting up the database with real time database
-            myRef.child("Users").child(user.getId()).setValue(user);
+
 
             //adding the user to FirebaseFirestore
             firestore.collection("users").document(user.getId()).set(user);
 
 
-//            Log.d(TAG, "addUserToDataBase: done");
         }
     }
 }

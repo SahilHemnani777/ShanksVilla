@@ -6,61 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".home.booking.BookingActivity2">
 
-    <FrameLayout
-        android:id="@+id/frame_not_found"
-        android:layout_width="320dp"
-        android:layout_height="99dp"
-        android:background="#FFCCCC"
+
+    <TextView
+        android:id="@+id/waiting"
+        android:layout_width="370dp"
+        android:layout_height="139dp"
+        android:text="Searching for the dates, it will take just few seonds..."
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.255">
-
-        <TextView
-            android:id="@+id/error_text"
-            android:layout_width="302dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Sorry the bookings are not available for the day, please select some other date! click the search button to check for other dates."
-
-            android:textColor="#FF0000"
-            android:textSize="18sp" />
-    </FrameLayout>
-
-    <ImageView
-        android:id="@+id/shanks_error"
-        android:layout_width="165dp"
-        android:layout_height="146dp"
-        app:layout_constraintBottom_toTopOf="@+id/frame_not_found"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/logo_new_removebg" />
-
-    <Button
-        android:id="@+id/btn_go_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="#FFCCCC"
-        android:text="search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frame_not_found" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="220dp"
-        android:layout_height="210dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.702"
-        app:srcCompat="@drawable/loading" />
+        app:layout_constraintVertical_bias="0.616" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
