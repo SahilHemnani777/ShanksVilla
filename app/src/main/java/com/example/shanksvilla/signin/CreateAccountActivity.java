@@ -9,14 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shanksvilla.R;
 import com.example.shanksvilla.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -75,36 +71,30 @@ public class CreateAccountActivity extends AppCompatActivity {
         }else{
             //Success case- When email and passwords are correctly filled
             mAuth.createUserWithEmailAndPassword(mEmail, mPassword)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()){
-                                            Log.d(TAG, "onComplete: "+user.getUid());
-                                            User ModelUser = new User(mName,"null",user.getUid(),mEmail);
-                                            myRef.child("Users").child(user.getUid()).setValue(ModelUser);
-                                            Toast.makeText(CreateAccountActivity.this, "Registration Successful, please check email for verification", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(CreateAccountActivity.this,GoogleSignInActivity.class));
-                                        }else{
-                                            //if the task is not successful
-                                            Toast.makeText(CreateAccountActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(CreateAccountActivity.this, GoogleSignInActivity.class));
-                                        }
-                                    }
-                                });
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(CreateAccountActivity.this, "Authentication failed please ",
-                                        Toast.LENGTH_SHORT).show();
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            user.sendEmailVerification().addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()){
+                                    Log.d(TAG, "onComplete: "+user.getUid());
+                                    User ModelUser = new User(mName,"null",user.getUid(),mEmail);
+                                    myRef.child("Users").child(user.getUid()).setValue(ModelUser);
+                                    Toast.makeText(CreateAccountActivity.this, "Registration Successful, please check email for verification", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(CreateAccountActivity.this,GoogleSignInActivity.class));
+                                }else{
+                                    //if the task is not successful
+                                    Toast.makeText(CreateAccountActivity.this, task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(CreateAccountActivity.this, GoogleSignInActivity.class));
+                                }
+                            });
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(CreateAccountActivity.this, "Authentication failed please ",
+                                    Toast.LENGTH_SHORT).show();
 //                                updateUI(null);
-                            }
                         }
                     });
 

@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,7 +47,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    private TextView createNewAccount;
+    private Button createNewAccount;
 
     //Initializing firestore
     FirebaseFirestore firestore= FirebaseFirestore.getInstance();
@@ -67,8 +66,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-
 
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.googleSignInbtn).setOnClickListener(view -> signIn());

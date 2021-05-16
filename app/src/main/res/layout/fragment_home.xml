@@ -7,6 +7,7 @@
     tools:context=".home.fragments.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_home_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#E4CBCB">
@@ -41,10 +42,10 @@
 
         <Button
             android:id="@+id/viewDetailsButton"
-            android:layout_width="138dp"
-            android:layout_height="45dp"
+            android:layout_width="114dp"
+            android:layout_height="47dp"
             android:layout_marginTop="4dp"
-            android:text="View Details"
+            android:text="Details"
             android:textColor="#0B0505"
             app:backgroundTint="@color/white"
             app:cornerRadius="20dp"

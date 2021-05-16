@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.shanksvilla.R;
@@ -36,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
 
     private static final String TAG = "HomeActivity";
-    private Snackbar snackBar;
+    Snackbar snackBar;
 
     private Button buttonLogout;
 
@@ -73,15 +74,28 @@ public class HomeActivity extends AppCompatActivity {
 
             switch (item.getItemId()){
                 case R.id.itemHome:
-                    HomeFragment homeFragment1 = new HomeFragment();
-                    fragmentManager.beginTransaction().replace(R.id.fragmentHolder, homeFragment1,null).commit();
-                    break;
+                    //checking if the fragment is present or not
+                    Fragment myFragment = getSupportFragmentManager().findFragmentByTag("home_fragment");
+                    if (myFragment != null && myFragment.isVisible()) {
+                        break;
+                    }else {
+                        HomeFragment homeFragment1 = new HomeFragment();
+                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder, homeFragment1,"home_fragment").commit();
+                        break;
+                    }
+
 
                 case R.id.itemProfile:
                     if (mAuth.getCurrentUser()!=null){
-                        ProfileFragment profileFragment = new ProfileFragment();
-                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,profileFragment,null).commit();
-                        break;
+                        Fragment myFragment2 = getSupportFragmentManager().findFragmentByTag("profile_fragment");
+                        if (myFragment2 != null && myFragment2.isVisible()) {
+                            break;
+                        }else {
+                            ProfileFragment profileFragment = new ProfileFragment();
+                            fragmentManager.beginTransaction().replace(R.id.fragmentHolder,profileFragment,"profile_fragment").commit();
+                            break;
+                        }
+
                     }else{
                         snackBar.show();
                     }
@@ -90,9 +104,15 @@ public class HomeActivity extends AppCompatActivity {
 
 
                 case R.id.itemAboutUs:
-                    DescriptionFragment descriptionFragment = new DescriptionFragment();
-                    fragmentManager.beginTransaction().replace(R.id.fragmentHolder,descriptionFragment,null).commit();
-                    break;
+                    Fragment myFragment2 = getSupportFragmentManager().findFragmentByTag("about_us_fragment");
+                    if (myFragment2 != null && myFragment2.isVisible()) {
+                        break;
+                    }else {
+                        DescriptionFragment descriptionFragment = new DescriptionFragment();
+                        fragmentManager.beginTransaction().replace(R.id.fragmentHolder,descriptionFragment,"about_us_fragment").commit();
+                        break;
+                    }
+
 
                 case R.id.itemBook:
                     if (mAuth.getCurrentUser()!=null){

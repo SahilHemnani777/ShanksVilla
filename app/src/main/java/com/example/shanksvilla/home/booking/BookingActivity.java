@@ -37,6 +37,7 @@ public class BookingActivity extends AppCompatActivity {
     private SimpleDateFormat dateFormat;
     private String CurrentDate;
     private TextView days;
+    private Toast mToast;
 
 
     //Integer array for selecting the number of seats
@@ -81,7 +82,7 @@ public class BookingActivity extends AppCompatActivity {
 
         dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         CurrentDate = dateFormat.format(calender.getDate());
-        Log.d(TAG, "onCreate: date" + CurrentDate);
+//        Log.d(TAG, "onCreate: date" + CurrentDate);
 
 
         calender.setOnDateChangeListener((calendarView, i, i1, i2) -> {
@@ -94,10 +95,13 @@ public class BookingActivity extends AppCompatActivity {
             int intCurrentMonth = Integer.valueOf(CurrentDate.substring(3, 5));
             int intCurrentYear = Integer.valueOf(CurrentDate.substring(6));
 
+            Log.d(TAG, "current date: " + intCurrentDay+"-"+intCurrentMonth+"-"+intCurrentYear);
+            Log.d(TAG, "Calender date: " + i2 + "-" + (i1+1)+"-"+ i);
+
 
 
             if (counter == 0) {
-                if (i2 < intCurrentDay && String.valueOf(i1+1).equals(intCurrentMonth) && String.valueOf(i).equals(intCurrentYear) ){
+                if (i2 < intCurrentDay && String.valueOf(i1+1).equals(String.valueOf(intCurrentMonth)) && String.valueOf(i).equals(String.valueOf(intCurrentYear)) ){
                     //if the date selected is less then the todays date
                     Toast.makeText(BookingActivity.this, "Staring date should not be less the Today's Date", Toast.LENGTH_SHORT).show();
                 } else {
