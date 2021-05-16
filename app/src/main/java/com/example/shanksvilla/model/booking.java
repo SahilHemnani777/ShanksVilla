@@ -1,17 +1,20 @@
 package com.example.shanksvilla.model;
 
 public class booking {
-    private final String bookingId;
-    private final String dateFrom;
-    private final String dateTo;
-    private final String UID;
-    private final String name_of_person;
-    private final String age;
-    private final String mobile_number;
-    private final String email;
+    private  String bookingId;
+    private  String dateFrom;
+    private  String dateTo;
+    private  String UID;
+    private  String name_of_person;
+    private  String age;
+    private  String mobile_number;
+    private  String email;
     //status means booking completed or not...
-    private final Integer status;
-    private  final  String details;
+    private  Integer status;
+    private  String details;
+
+    public booking() {
+    }
 
     public booking(String bookingId, String dateFrom,
                    String dateTo, String UID, String name_of_person,

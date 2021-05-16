@@ -53,6 +53,9 @@ dependencies {
     //Dependencies for Image courseal
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //for recycler view
+    implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'
+
     //card view
     implementation "androidx.cardview:cardview:1.0.0"
 
