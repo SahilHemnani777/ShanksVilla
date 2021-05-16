@@ -12,7 +12,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shanksvilla.R;
@@ -83,51 +82,52 @@ public class BookingActivity extends AppCompatActivity {
         dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         CurrentDate = dateFormat.format(calender.getDate());
         Log.d(TAG, "onCreate: date" + CurrentDate);
-//        Log.d(TAG, "onCreate: getDate" + calender.getDate());
 
-        calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                // i2 -> day
-                // i1 -> month - 1
-                // i -> year
 
-                String CurrentDay = CurrentDate.substring(0, 2);
-                int intCurrentDay = Integer.valueOf(CurrentDay);
+        calender.setOnDateChangeListener((calendarView, i, i1, i2) -> {
+            // i2 -> day
+            // i1 -> month - 1
+            // i -> year
 
-                if (counter == 0) {
-                    if (i2 < intCurrentDay) {
-                        //if the date selected is less then the todays date
-                        Toast.makeText(BookingActivity.this, "Staring date should not be less the Today's Date", Toast.LENGTH_SHORT).show();
-                    } else {
-                        dateFrom.setText(i2 + "-" + (i1 + 1) + "-" + i);
-                        startDate = setDate(i2, (i1 + 1), i, startDate);
-                        x = i2;
-                        y = i1;
-                        z = i;
-                        counter++;
-                        displayText.setText("Now select the end date");
-                    }
+            String CurrentDay = CurrentDate.substring(0, 2);
+            int intCurrentDay = Integer.valueOf(CurrentDay);
+            int intCurrentMonth = Integer.valueOf(CurrentDate.substring(3, 5));
+            int intCurrentYear = Integer.valueOf(CurrentDate.substring(6));
 
+
+
+            if (counter == 0) {
+                if (i2 < intCurrentDay && String.valueOf(i1+1).equals(intCurrentMonth) && String.valueOf(i).equals(intCurrentYear) ){
+                    //if the date selected is less then the todays date
+                    Toast.makeText(BookingActivity.this, "Staring date should not be less the Today's Date", Toast.LENGTH_SHORT).show();
                 } else {
+                    dateFrom.setText(i2 + "-" + (i1 + 1) + "-" + i);
+                    startDate = setDate(i2, (i1 + 1), i, startDate);
+                    x = i2;
+                    y = i1;
+                    z = i;
+                    counter++;
+                    displayText.setText("Now select the end date");
+                }
+
+            } else {
 //                    Log.d(TAG, "onSelectedDayChange: "+x+y+z);
-                    if (i2 >= x && i1 >= y && i >= z) {
+                if (i2 >= x && i1 >= y && i >= z) {
+                    dateTo.setText(i2 + "-" + (i1 + 1) + "-" + i);
+                    endDate = setDate(i2, (i1 + 1), i, endDate);
+                    displayText.setText("Select no. of people");
+                } else {
+                    if (i1 > y) {
                         dateTo.setText(i2 + "-" + (i1 + 1) + "-" + i);
                         endDate = setDate(i2, (i1 + 1), i, endDate);
                         displayText.setText("Select no. of people");
                     } else {
-                        if (i1 > y) {
+                        if (i > z) {
                             dateTo.setText(i2 + "-" + (i1 + 1) + "-" + i);
                             endDate = setDate(i2, (i1 + 1), i, endDate);
                             displayText.setText("Select no. of people");
                         } else {
-                            if (i > z) {
-                                dateTo.setText(i2 + "-" + (i1 + 1) + "-" + i);
-                                endDate = setDate(i2, (i1 + 1), i, endDate);
-                                displayText.setText("Select no. of people");
-                            } else {
-                                Toast.makeText(BookingActivity.this, "End date can't be before start date", Toast.LENGTH_SHORT).show();
-                            }
+                            Toast.makeText(BookingActivity.this, "End date can't be before start date", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -148,16 +148,18 @@ public class BookingActivity extends AppCompatActivity {
         });
 
         btnSearch.setOnClickListener(view -> {
-            Intent intent = new Intent(BookingActivity.this, BookingActivity2.class);
-            intent.putExtra("startDate", startDate);
-            intent.putExtra("endDate", endDate);
-            intent.putExtra("count", Integer.valueOf(peoples.getText().toString()));
-//            intent.putExtra("days", Integer.valueOf(days.getText().toString()));
-            startActivity(intent);
-            finish();
+            if(dateFrom.getText().toString().equals("From") || dateTo.getText().toString().equals("To")){
+                Log.d(TAG, "onCreate: check");
+                Toast.makeText(this, "Please select dates correctly.", Toast.LENGTH_SHORT).show();
+
+            }else {Intent intent = new Intent(BookingActivity.this, BookingActivity2.class);
+                intent.putExtra("startDate", startDate);
+                intent.putExtra("endDate", endDate);
+                intent.putExtra("count", Integer.valueOf(peoples.getText().toString()));
+                startActivity(intent);
+                finish();}
+
         });
-
-
     }
 
     public int setDate(int d, int m, int y, int date) {
