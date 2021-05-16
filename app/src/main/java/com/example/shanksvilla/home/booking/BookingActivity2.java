@@ -27,7 +27,7 @@ public class BookingActivity2 extends AppCompatActivity {
     private String startDate;
     private String endDate;
     private int people;
-    private int days;
+//    private int days;
 
 
     private boolean db1Found=true;
@@ -36,7 +36,7 @@ public class BookingActivity2 extends AppCompatActivity {
     private final ArrayList<Integer> extracted_dates = new ArrayList<>();
 
 
-    private final ArrayList<String> is_available = new ArrayList<>(days);
+//    private final ArrayList<String> is_available = new ArrayList<>(days);
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
 
@@ -57,10 +57,15 @@ public class BookingActivity2 extends AppCompatActivity {
         endDate = String.format("%08d", reverse(bundle.getInt("endDate")));
         people = bundle.getInt("count");
 //        days= bundle.getInt("days");
-        Log.d(TAG, "onCreate: " + startDate + "------------" + endDate);
-        extract_date(startDate, endDate);
-        Collections.sort(extracted_dates);
-        Log.d(TAG, "onCreate: " + extracted_dates);
+//        Log.d(TAG, "onCreate: " + startDate + "------------" + endDate);
+        if(startDate.equals(endDate)){
+            extracted_dates.add(reverse(bundle.getInt("startDate")));
+        }else{
+            extract_date(startDate, endDate);
+            Collections.sort(extracted_dates);
+            Log.d(TAG, "onCreate: " + extracted_dates);
+        }
+
 
         searchInDatabase("database1");
         searchInDatabase("database2");
