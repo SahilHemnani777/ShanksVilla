@@ -6,4 +6,61 @@
     android:layout_height="match_parent"
     tools:context=".admin.AdminActivity">
 
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="403dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="72dp"
+        android:gravity="center"
+        android:text="ShankVilla Admin"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_new_removebg" />
+
+    <Button
+        android:id="@+id/admin_boking_button"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="152dp"
+        android:text="Bookings"
+        app:backgroundTint="@color/purple_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <Button
+        android:id="@+id/admin_about_us_button"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="84dp"
+        android:text="About Us"
+        app:backgroundTint="@color/purple_500"
+        app:layout_constraintEnd_toEndOf="@+id/admin_boking_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/admin_boking_button"
+        app:layout_constraintTop_toBottomOf="@+id/admin_boking_button" />
+
+    <TextView
+        android:id="@+id/admin_shift_buton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Switch to normal user "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

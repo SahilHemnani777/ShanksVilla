@@ -10,8 +10,8 @@
 
     <TextView
         android:id="@+id/profile_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="316dp"
+        android:layout_height="42dp"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="Profile"
@@ -23,8 +23,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profile_img_iv"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="107dp"
+        android:layout_height="109dp"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -61,7 +61,7 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_button_btn_background"
         android:paddingLeft="24dp"
         android:paddingTop="8dp"
@@ -72,16 +72,18 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookings_view_list"
-        android:layout_width="419dp"
-        android:layout_height="286dp"
+        android:layout_width="405dp"
+        android:layout_height="362dp"
         app:layout_constraintBottom_toTopOf="@+id/signout_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/email_tv"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView14"

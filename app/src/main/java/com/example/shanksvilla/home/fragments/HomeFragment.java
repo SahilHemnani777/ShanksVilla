@@ -16,6 +16,8 @@ import com.example.shanksvilla.signin.GoogleSignInActivity;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class HomeFragment extends Fragment {
@@ -23,6 +25,8 @@ public class HomeFragment extends Fragment {
     private Button locationButton, dateButton, viewDetailsButton;
     private FirebaseAuth mAuth;
     private Snackbar snackBar;
+    private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    DocumentReference docRef = firebaseFirestore.collection("details").document("info");
 
 
     @Override
@@ -53,10 +57,18 @@ public class HomeFragment extends Fragment {
                 .setCancelable(true).show());
 
         viewDetailsButton.setOnClickListener(v1 -> {
-            new AlertDialog.Builder(getActivity())
-                    .setTitle("ShanksVilla")
-                    .setMessage("-----TAGLINE-----")
-                    .setCancelable(true).show();
+            docRef.get().addOnCompleteListener(z->{
+
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("ShanksVilla")
+                        .setMessage(z.getResult().get("tagline1").toString()+"\n"
+                                        +z.getResult().get("tagline2").toString()+"\n"+
+                                "News\n"+z.getResult().get("news").toString()+
+                                "\nPrice per person: "+z.getResult().get("price").toString()
+                                )
+                        .setCancelable(true).show();
+            });
+
         });
 
         return v;
