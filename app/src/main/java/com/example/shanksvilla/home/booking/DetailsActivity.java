@@ -56,7 +56,7 @@ public class DetailsActivity extends AppCompatActivity {
         ArrayList<Integer> list = (ArrayList<Integer>) bundle.get("dates");
         Log.d(TAG, "onCreate: " + list + "aa gayi");
         Integer startDate = list.get(0);
-        Integer endDate = list.get(list.size()-1);
+        Integer endDate = list.get(list.size() - 1);
 
 
         btnDone.setOnClickListener(v -> {
@@ -84,17 +84,20 @@ public class DetailsActivity extends AppCompatActivity {
                                 HashMap<String, String> map = (HashMap<String, String>) task1.getResult().getValue();
                                 //finding no. of booking
                                 Integer no_of_bookings = map.size();
-                                myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).setValue(user);
-                                myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).child("no_of_members").setValue(number);
-                                myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).child("details").setValue(mpeoplesDetails);
+                                myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("booking" + no_of_bookings).setValue(user);
+                                myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("booking" + no_of_bookings).child("no_of_members").setValue(number);
+                                myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("booking" + no_of_bookings).child("details").setValue(mpeoplesDetails);
                                 myRef.child("database1").child(String.format("%08d", list.get(finalI))).child("vacancies").setValue(old.get() - number);
 
                                 //saving the bookings globally for admins with some booking ID (serialWise)
-                                booking booking = new booking(mName+mPhone+currentUser.getUid(), startDate.toString(), endDate.toString(), currentUser.getUid(),
-                                        mName, mAge, mPhone, currentUser.getEmail(), 0, mpeoplesDetails);
-                                firebaseFirestore.collection("bookings-kihim").document(mName+"|"+mPhone+"|"+currentUser.getUid()).set(booking);
+                                booking booking = new booking(mName +"|"+ mPhone +"|"+ currentUser.getUid(), startDate.toString(), endDate.toString(), currentUser.getUid(),
+                                        mName, mAge, mPhone, currentUser.getEmail(), 0, mpeoplesDetails, "kihim");
+                                firebaseFirestore.collection("bookings-kihim").document(mName + "|" + mPhone + "|" + currentUser.getUid()).set(booking);
 
-                                firebaseFirestore.collection("users").document(currentUser.getUid()).collection("bookings").document(mName+"|"+mPhone+"|"+currentUser.getUid()).set(booking);
+                                firebaseFirestore.collection("bookings-global").document(mName + "|" + mPhone + "|" + currentUser.getUid()).set(booking);
+
+
+                                firebaseFirestore.collection("users").document(currentUser.getUid()).collection("bookings").document(mName + "|" + mPhone + "|" + currentUser.getUid()).set(booking);
 
                                 Toast.makeText(this, "Booking Confirmed", Toast.LENGTH_SHORT).show();
                             });
@@ -113,10 +116,21 @@ public class DetailsActivity extends AppCompatActivity {
                                 HashMap<String, String> map = (HashMap<String, String>) task1.getResult().getValue();
                                 //finding no. of booking
                                 Integer no_of_bookings = map.size();
-                                myRef.child("database2").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).setValue(user);
-                                myRef.child("database2").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).child("no_of_members").setValue(number);
-                                myRef.child("database2").child(String.format("%08d", list.get(finalI))).child("booking"+no_of_bookings).child("details").setValue(mpeoplesDetails);
+                                myRef.child("database2").child(String.format("%08d", list.get(finalI))).child("booking" + no_of_bookings).setValue(user);
+                                myRef.child("database2").child(String.format("%08d", list.get(finalI))).child("booking" + no_of_bookings).child("no_of_members").setValue(number);
+                                myRef.child("database2").child(String.format("%08d", list.get(finalI))).child("booking" + no_of_bookings).child("details").setValue(mpeoplesDetails);
                                 myRef.child("database2").child(String.format("%08d", list.get(finalI))).child("vacancies").setValue(old.get() - number);
+
+                                //saving the bookings globally for admins with some booking ID (serialWise)
+                                booking booking = new booking(mName +"|"+ mPhone +"|"+ currentUser.getUid(), startDate.toString(), endDate.toString(), currentUser.getUid(),
+                                        mName, mAge, mPhone, currentUser.getEmail(), 0, mpeoplesDetails, "pune");
+                                firebaseFirestore.collection("bookings-pune").document(mName + "|" + mPhone + "|" + currentUser.getUid()).set(booking);
+
+                                firebaseFirestore.collection("bookings-global").document(mName + "|" + mPhone + "|" + currentUser.getUid()).set(booking);
+
+
+                                firebaseFirestore.collection("users").document(currentUser.getUid()).collection("bookings").document(mName + "|" + mPhone + "|" + currentUser.getUid()).set(booking);
+
                                 Toast.makeText(this, "Booking Confirmed", Toast.LENGTH_SHORT).show();
                             });
 

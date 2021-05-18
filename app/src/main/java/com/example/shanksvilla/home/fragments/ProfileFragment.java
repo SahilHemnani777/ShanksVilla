@@ -61,14 +61,11 @@ public class ProfileFragment extends Fragment {
         // configure sign out button
         signOutBtn = v.findViewById(R.id.signout_btn);
         // give on click listener
-        signOutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // get reference to the calling activity HomeActivity
-                HomeActivity homeActivity = (HomeActivity) getActivity();
-                // sign out now
-                homeActivity.signOut();
-            }
+        signOutBtn.setOnClickListener(view -> {
+            // get reference to the calling activity HomeActivity
+            HomeActivity homeActivity = (HomeActivity) getActivity();
+            // sign out now
+            homeActivity.signOut();
         });
         // configure edit profile textview
 
@@ -153,10 +150,10 @@ public class ProfileFragment extends Fragment {
 
          public BookingsViewHolder(@NonNull View itemView) {
             super(itemView);
-            id = itemView.findViewById(R.id.bookingId);
-            sdate= itemView.findViewById(R.id.sDate);
-            eDate= itemView.findViewById(R.id.eDate);
-            details= itemView.findViewById(R.id.detail_of_bookng);
+            id = itemView.findViewById(R.id.admin_bookingId);
+            sdate= itemView.findViewById(R.id.admin_sDate);
+            eDate= itemView.findViewById(R.id.admin_eDate);
+            details= itemView.findViewById(R.id.admin_detail_of_bookng);
         }
     }
 

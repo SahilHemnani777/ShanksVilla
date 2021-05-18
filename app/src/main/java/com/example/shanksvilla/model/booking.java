@@ -12,6 +12,7 @@ public class booking {
     //status means booking completed or not...
     private  Integer status;
     private  String details;
+    private String location;
 
     public booking() {
     }
@@ -19,7 +20,7 @@ public class booking {
     public booking(String bookingId, String dateFrom,
                    String dateTo, String UID, String name_of_person,
                    String age, String mobile_number, String email,
-                   Integer status, String details) {
+                   Integer status, String details, String location) {
         this.bookingId = bookingId;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
@@ -30,6 +31,7 @@ public class booking {
         this.email = email;
         this.status = status;
         this.details = details;
+        this.location=location;
     }
 
     public String getBookingId() {
@@ -70,5 +72,13 @@ public class booking {
 
     public  String getDetails(){
         return details;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
