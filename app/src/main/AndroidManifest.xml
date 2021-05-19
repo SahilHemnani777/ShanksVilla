@@ -48,6 +48,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.razorpay.Apikey"
+            android:value="rzp_test_HXSpml2T1yVSld">
+        </meta-data>
     </application>
 
 </manifest>
