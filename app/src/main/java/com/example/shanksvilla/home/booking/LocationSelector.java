@@ -60,7 +60,7 @@ public class LocationSelector extends AppCompatActivity {
         if (!bundle.getString("database1").equals("found")) buttonK.setVisibility(View.GONE);
         if (!bundle.getString("database2").equals("found")) buttonP.setVisibility(View.GONE);
 
-        if (!bundle.getString("database1").equals("found") && !bundle.getString("database1").equals("found")) {
+        if (!bundle.getString("database1").equals("found") && !bundle.getString("database2").equals("found")) {
             searchButton.setVisibility(View.VISIBLE);
             error_text.setVisibility(View.VISIBLE);
             frameLayout.setVisibility(View.VISIBLE);

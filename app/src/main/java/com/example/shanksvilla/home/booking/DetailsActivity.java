@@ -61,9 +61,12 @@ public class DetailsActivity extends AppCompatActivity implements PaymentResultL
 
         btnDone.setOnClickListener(v -> {
             if (!name.getText().toString().equals("") && !age.getText().toString().equals("") && !phone.getText().toString().equals("") && !peoplesDetails.getText().toString().equals("")) {
-                Log.d(TAG, "onCreate: Razor Pay");
-                startPayment();
-
+                if (!(phone.getText().toString().length() == 10)) {
+                    Toast.makeText(this, "Please enter a valid mobile number", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d(TAG, "onCreate: Razor Pay");
+                    startPayment();
+                }
             } else {
                 Toast.makeText(this, "Please enter all the details..", Toast.LENGTH_SHORT).show();
             }
@@ -125,6 +128,7 @@ public class DetailsActivity extends AppCompatActivity implements PaymentResultL
                         firebaseFirestore.collection("users").document(currentUser.getUid()).collection("bookings").document(mName + "|" + mPhone + "|" + currentUser.getUid()).set(booking);
 
                         Toast.makeText(this, "Booking Confirmed", Toast.LENGTH_SHORT).show();
+                        finish();
                     });
 
                 });
@@ -157,6 +161,7 @@ public class DetailsActivity extends AppCompatActivity implements PaymentResultL
                         firebaseFirestore.collection("users").document(currentUser.getUid()).collection("bookings").document(mName + "|" + mPhone + "|" + currentUser.getUid()).set(booking);
 
                         Toast.makeText(this, "Booking Confirmed", Toast.LENGTH_SHORT).show();
+                        finish();
                     });
 
                 });
@@ -167,7 +172,7 @@ public class DetailsActivity extends AppCompatActivity implements PaymentResultL
 
     @Override
     public void onPaymentError(int i, String s) {
-
+        Toast.makeText(this, "Payment Failed due to: " + s, Toast.LENGTH_SHORT).show();
     }
 
 
