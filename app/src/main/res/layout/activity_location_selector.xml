@@ -41,16 +41,16 @@
 
     <Button
         android:id="@+id/buttonK"
-        android:layout_width="wrap_content"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="60dp"
         android:text="Kihim Beach"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerCardView" />
 
     <Button
         android:id="@+id/buttonP"
-        android:layout_width="wrap_content"
+        android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:text="Pune"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,38 +66,33 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.863">
+        app:layout_constraintVertical_bias="0.914">
 
+        <TextView
+            android:id="@+id/error_text"
+            android:layout_width="302dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sorry the bookings are not available for the day, please select some other date! click the search button to check for other dates."
+
+            android:textColor="#FF0000"
+            android:textSize="18sp"
+            android:visibility="invisible" />
     </FrameLayout>
-
-    <TextView
-        android:id="@+id/error_text"
-        android:layout_width="302dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Sorry the bookings are not available for the day, please select some other date! click the search button to check for other dates."
-
-        android:textColor="#FF0000"
-        android:textSize="18sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/frame_not_found"
-        app:layout_constraintEnd_toEndOf="@+id/frame_not_found"
-        app:layout_constraintStart_toStartOf="@+id/frame_not_found"
-        app:layout_constraintTop_toTopOf="@+id/frame_not_found" />
 
     <Button
         android:id="@+id/buttonSearch"
-        android:layout_width="76dp"
-        android:layout_height="41dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="100dp"
+        android:layout_height="50sp"
+        android:layout_marginBottom="4dp"
         android:text="Search"
-        android:textSize="8sp"
+        android:textSize="10sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.shanksvilla.home.fragments;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shanksvilla.R;
 import com.example.shanksvilla.home.HomeActivity;
 import com.example.shanksvilla.model.booking;
+import com.example.shanksvilla.signin.GoogleSignInActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -66,6 +68,7 @@ public class ProfileFragment extends Fragment {
             HomeActivity homeActivity = (HomeActivity) getActivity();
             // sign out now
             homeActivity.signOut();
+            startActivity(new Intent(homeActivity, GoogleSignInActivity.class));
         });
         // configure edit profile textview
 

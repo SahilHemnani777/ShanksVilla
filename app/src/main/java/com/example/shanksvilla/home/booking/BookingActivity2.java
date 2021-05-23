@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -101,12 +100,13 @@ public class BookingActivity2 extends AppCompatActivity {
                 }
                 Log.d(TAG, "onDataChange: " + dates);
                 if (dates.isEmpty()) {
-                    Toast.makeText(BookingActivity2.this, "Found in "
-                            + name_of_database, Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "found in : "+ name_of_database);
+//                    Toast.makeText(BookingActivity2.this, "Found in "
+//                            + name_of_database, Toast.LENGTH_LONG).show();
                     intent_to_start.putExtra(name_of_database, "found");
                     intent_to_start.putExtra("dates", extracted_dates);
                     intent_to_start.putExtra("people", people);
-                    Log.d(TAG, "onDataChange: if me aa gaya");
+//                    Log.d(TAG, "onDataChange: if me aa gaya");
                 } else {
                     if(name_of_database=="database1"){
                         db1Found=false;
@@ -114,8 +114,10 @@ public class BookingActivity2 extends AppCompatActivity {
                         db2Found=false;
                     }
                     intent_to_start.putExtra(name_of_database, "Notfound");
-                    Toast.makeText(BookingActivity2.this, "Not Found in "
-                            + name_of_database, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(BookingActivity2.this, "Not Found in "
+//                            + name_of_database, Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Not Found in: " + name_of_database);
+
                 }
             }
 

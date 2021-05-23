@@ -97,6 +97,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
                             Toast.makeText(GoogleSignInActivity.this, "Please verify your email address", Toast.LENGTH_SHORT).show();
                         }
                     }else{
+                        if(!email.equals("7777777"))
                         Toast.makeText(GoogleSignInActivity.this, "Please enter Valid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 });
