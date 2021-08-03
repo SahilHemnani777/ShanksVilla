@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shanksvilla.R;
+import com.example.shanksvilla.mailing_system.GMailSender;
 import com.example.shanksvilla.model.booking;
 import com.example.shanksvilla.model.dbRef;
 import com.google.firebase.auth.FirebaseAuth;
@@ -97,6 +98,7 @@ public class DetailsActivity extends AppCompatActivity implements PaymentResultL
         String mPhone = phone.getText().toString();
         String mpeoplesDetails = peoplesDetails.getText().toString();
 
+        GMailSender sender = new GMailSender("sahil@ecgit.com", "internshipwithecgit");
 
         dbRef user = new dbRef(mName, Integer.parseInt(mAge), 0, mPhone, UID);
         if (bundle.getString("location").equals("kihim")) {
@@ -128,6 +130,24 @@ public class DetailsActivity extends AppCompatActivity implements PaymentResultL
                         firebaseFirestore.collection("users").document(currentUser.getUid()).collection("bookings").document(mName + "|" + mPhone + "|" + currentUser.getUid()).set(booking);
 
                         Toast.makeText(this, "Booking Confirmed", Toast.LENGTH_SHORT).show();
+
+                        try {
+                            sender.sendMail("Booking Confirmed",
+                                    "Your booking with booking Id: " +mName + "|" + mPhone + "|" + currentUser.getUid() + "is confirmed.\n\n\n" +
+                                            "from : " + startDate.toString() + "\n" +
+                                            "to : " + endDate.toString() + "\n" + "\n"+
+                                            "Hotel location: Kihim beach\n" +
+                                            "Details: " + mpeoplesDetails + "\n" +
+                                            "for any queries contact XXXXXXXXXX" +
+                                                    "Thanks and regards\nShanks Villa",
+                                    "sahil@ecgit.com",
+                                    currentUser.getEmail());
+                        } catch (Exception e) {
+                            System.out.println((e.toString()));
+                            e.printStackTrace();
+                        }
+                        Log.d(TAG, "onCreate: sent");
+
                         finish();
                     });
 
@@ -159,7 +179,22 @@ public class DetailsActivity extends AppCompatActivity implements PaymentResultL
 
 
                         firebaseFirestore.collection("users").document(currentUser.getUid()).collection("bookings").document(mName + "|" + mPhone + "|" + currentUser.getUid()).set(booking);
-
+                        try {
+                            sender.sendMail("Booking Confirmed",
+                                    "Your booking with booking Id: " +mName + "|" + mPhone + "|" + currentUser.getUid() + "is confirmed.\n\n\n" +
+                                            "from : " + startDate.toString() + "\n" +
+                                            "to : " + endDate.toString() + "\n" + "\n"+
+                                            "Hotel location: Pune\n" +
+                                            "Details: " + mpeoplesDetails + "\n" +
+                                            "for any queries contact XXXXXXXXXX" +
+                                            "Thanks and regards\nShanks Villa",
+                                    "sahil@ecgit.com",
+                                    currentUser.getEmail());
+                        } catch (Exception e) {
+                            System.out.println((e.toString()));
+                            e.printStackTrace();
+                        }
+                        Log.d(TAG, "onCreate: sent");
                         Toast.makeText(this, "Booking Confirmed", Toast.LENGTH_SHORT).show();
                         finish();
                     });
